@@ -6,8 +6,8 @@ namespace SpaceShooter {
 	
 		private InputActions _inputActions;
 
-		private Vector3 rotation;
-		private Vector3 movement;
+		private Vector3 _rotation;
+		private Vector3 _movement;
 
 		private Rigidbody _rigidbody;
 
@@ -17,20 +17,20 @@ namespace SpaceShooter {
 			_inputActions = new InputActions();
 		
 			//movement
-			_inputActions.ShipControls.MoveLeftRight.performed += context => movement.x = context.ReadValue<float>();
-			_inputActions.ShipControls.MoveUpDown.performed += context => movement.y = context.ReadValue<float>();
-			_inputActions.ShipControls.MoveForwardBack.performed += context => movement.z = -context.ReadValue<float>();
+			_inputActions.ShipControls.MoveLeftRight.performed += context => _movement.x = context.ReadValue<float>();
+			_inputActions.ShipControls.MoveUpDown.performed += context => _movement.y = context.ReadValue<float>();
+			_inputActions.ShipControls.MoveForwardBack.performed += context => _movement.z = -context.ReadValue<float>();
 		
 			//rotation
-			_inputActions.ShipControls.RotateUpDown.performed += context => rotation.x = -context.ReadValue<float>();
-			_inputActions.ShipControls.RotateLeftRight.performed += context => rotation.y = context.ReadValue<float>();
-			_inputActions.ShipControls.Roll.performed += context => rotation.z = -context.ReadValue<float>()*5;
+			_inputActions.ShipControls.RotateUpDown.performed += context => _rotation.x = -context.ReadValue<float>();
+			_inputActions.ShipControls.RotateLeftRight.performed += context => _rotation.y = context.ReadValue<float>();
+			_inputActions.ShipControls.Roll.performed += context => _rotation.z = -context.ReadValue<float>()*5;
 		}
 
 		// Update is called once per frame
-		void FixedUpdate() {
-			_rigidbody.AddRelativeForce(movement*50);
-			_rigidbody.AddRelativeTorque(rotation*1.3f);
+		private void FixedUpdate() {
+			_rigidbody.AddRelativeForce(_movement*50);
+			_rigidbody.AddRelativeTorque(_rotation*1.3f);
 		}
 
 		private void OnEnable() {

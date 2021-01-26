@@ -4,7 +4,7 @@ public class CameraFollow : MonoBehaviour
 {
 	// camera will follow this object
 	public Transform Target;
-	public Transform Target2;
+	
 	//camera transform
 	public Transform camTransform;
 	

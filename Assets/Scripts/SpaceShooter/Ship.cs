@@ -34,20 +34,20 @@ namespace SpaceShooter {
 			Gradient g = null;
 			switch (fraction) {
 				case Fraction.PLAYER:
-					mat = GameManager.PlayerEngineMat;
-					g = GameManager.PlayerTrailGradient;
+					mat = GameManager.Instance.playerEngineMat;
+					g = GameManager.Instance.playerTrailGradient;
 					break;
 				case Fraction.ENEMY:
-					mat = GameManager.EnemyEngineMat;
-					g = GameManager.EnemyTrailGradient;
+					mat = GameManager.Instance.enemyEngineMat;
+					g = GameManager.Instance.enemyTrailGradient;
 					break;
 				case Fraction.NEUTRAL:
-					mat = GameManager.NeutralEngineMat;
-					g = GameManager.NeutralTrailGradient;
+					mat = GameManager.Instance.neutralEngineMat;
+					g = GameManager.Instance.neutralTrailGradient;
 					break;
 				default:
-					mat = GameManager.PlayerEngineMat;
-					g = GameManager.PlayerTrailGradient;
+					mat = GameManager.Instance.playerEngineMat;
+					g = GameManager.Instance.playerTrailGradient;
 					break;
 			}
 			Material[] materials = mesh.materials;
