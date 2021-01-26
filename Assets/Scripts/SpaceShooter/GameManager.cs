@@ -4,15 +4,29 @@ using UnityEngine;
 namespace SpaceShooter {
 	public class GameManager : MonoBehaviour {
 
+		public bool enableNebulas = true;
+
 		public GameObject nebula;
 
 		public Transform player;
 
 		public Gradient nebulaColors;
-		public static int chunkSize;
+		public static int chunkSize = 1000;
 		public Vector3 currentChunk;
 
-
+		[SerializeField] private Material enemyEngineMat;
+		[SerializeField] private Material playerEngineMat;
+		[SerializeField] private Material neutralEngineMat;
+		[SerializeField] private Gradient enemyTrailGradient;
+		[SerializeField] private Gradient playerTrailGradient;
+		[SerializeField] private Gradient neutralTrailGradient;
+		
+		public static Material EnemyEngineMat;
+		public static Material PlayerEngineMat;
+		public static Material NeutralEngineMat;
+		public static Gradient EnemyTrailGradient;
+		public static Gradient PlayerTrailGradient;
+		public static Gradient NeutralTrailGradient;
 
 		private List<Chunk> chunks = new List<Chunk>();
 
@@ -22,6 +36,12 @@ namespace SpaceShooter {
 		//private int frameCount;
 		// Start is called before the first frame update
 		void Start() {
+			EnemyEngineMat = enemyEngineMat;
+			PlayerEngineMat = playerEngineMat;
+			NeutralEngineMat = neutralEngineMat;
+			EnemyTrailGradient = enemyTrailGradient;
+			PlayerTrailGradient = playerTrailGradient;
+			NeutralTrailGradient = neutralTrailGradient;
 			currentChunk = Vector3.zero;
 			GenerateNewEnvironmentStuff();
 		}
@@ -40,15 +60,15 @@ namespace SpaceShooter {
 				currentChunk.z += 1;
 				GenerateNewEnvironmentStuff();
 			}
-			if (player.transform.position.x < chunkSize * currentChunk.x) {
+			if (player.transform.position.x < chunkSize * currentChunk.x - chunkSize) {
 				currentChunk.x -= 1;
 				GenerateNewEnvironmentStuff();
 			}
-			if (player.transform.position.y < chunkSize * currentChunk.y) {
+			if (player.transform.position.y < chunkSize * currentChunk.y - chunkSize) {
 				currentChunk.y -= 1;
 				GenerateNewEnvironmentStuff();
 			}
-			if (player.transform.position.y < chunkSize * currentChunk.z) {
+			if (player.transform.position.y < chunkSize * currentChunk.z - chunkSize) {
 				currentChunk.z -= 1;
 				GenerateNewEnvironmentStuff();
 			}
@@ -61,9 +81,11 @@ namespace SpaceShooter {
 
 		private void GenerateNewEnvironmentStuff() {
 			for (int i = 0; i < nebulaCount; i++) {
-				Vector3 currentNebulaPosition = GetOrCreateCurrentChunk().nebulaPositions[i];
-				GameObject nebula2 = Instantiate(nebula, player.transform.position + currentNebulaPosition, new Quaternion());
-				nebula2.GetComponent<ParticleSystem>().startColor = nebulaColors.Evaluate(Perlin3D(currentNebulaPosition));
+				if (enableNebulas) {
+					Vector3 currentNebulaPosition = GetOrCreateCurrentChunk().nebulaPositions[i];
+					GameObject nebula2 = Instantiate(nebula, player.transform.position + currentNebulaPosition, new Quaternion());
+					nebula2.GetComponent<ParticleSystem>().startColor = nebulaColors.Evaluate(Perlin3D(currentNebulaPosition));
+				}
 			}
 		}
 
