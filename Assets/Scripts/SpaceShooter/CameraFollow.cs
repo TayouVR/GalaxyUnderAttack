@@ -7,26 +7,16 @@ public class CameraFollow : MonoBehaviour
 	public Transform Target2;
 	//camera transform
 	public Transform camTransform;
-	// offset between camera and target
-	public Vector3 Offset;
+	
 	// change this value to get desired smoothness
 	public float SmoothTime = 0.3f;
- 
-	// This value will change at the runtime depending on target movement. Initialize with zero vector.
-	private Vector3 velocity = Vector3.zero;
- 
-	private void Start()
-	{
-		Offset = camTransform.position - Target.position;
-	}
  
 	private void FixedUpdate()
 	{
 		// update position
-		Vector3 targetPosition = Target.position + Offset;
-		camTransform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, SmoothTime);
+		camTransform.position = Vector3.Lerp(Target.position, camTransform.position, SmoothTime);
  
 		// update rotation
-		transform.LookAt(Target2, Target.up);
+		camTransform.localRotation = Quaternion.Lerp(Target.rotation, camTransform.rotation, SmoothTime);
 	}
 }
