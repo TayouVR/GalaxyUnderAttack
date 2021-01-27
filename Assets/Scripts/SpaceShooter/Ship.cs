@@ -9,7 +9,7 @@ namespace SpaceShooter {
 		public Renderer mesh;
 		public Transform[] weapons;
 
-		public Transform turretMount;
+		public Transform[] turretMounts;
 		
 		public int engineMatIndex;
 
