@@ -29,11 +29,11 @@ namespace SpaceShooter {
 			_inputActions.ShipControls.Roll.performed += context => _rotation.z = -context.ReadValue<float>()*5;
 		}
 
-		private void Init() {
+		public void Init() {
 			enableMovement = true;
 		}
 
-		private void Pause() {
+		public void Pause() {
 			enableMovement = false;
 		}
 

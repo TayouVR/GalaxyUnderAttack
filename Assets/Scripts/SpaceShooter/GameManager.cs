@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Cursor = UnityEngine.Cursor;
 
 namespace SpaceShooter {
 	public class GameManager : MonoBehaviour {
@@ -58,7 +59,9 @@ namespace SpaceShooter {
 		}
 
 		private void StartGame() {
-			
+			Cursor.lockState = CursorLockMode.Locked;
+			uiDocument.enabled = false;
+			player.GetComponent<Player>().Init();
 		}
 
 		private void ShipSelectMenu() {
