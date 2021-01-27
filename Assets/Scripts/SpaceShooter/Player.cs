@@ -11,6 +11,8 @@ namespace SpaceShooter {
 
 		private Rigidbody _rigidbody;
 
+		private bool enableMovement;
+
 		private void Awake() {
 		
 			_rigidbody = GetComponent<Rigidbody>();
@@ -27,10 +29,20 @@ namespace SpaceShooter {
 			_inputActions.ShipControls.Roll.performed += context => _rotation.z = -context.ReadValue<float>()*5;
 		}
 
+		private void Init() {
+			enableMovement = true;
+		}
+
+		private void Pause() {
+			enableMovement = false;
+		}
+
 		// Update is called once per frame
 		private void FixedUpdate() {
-			_rigidbody.AddRelativeForce(_movement*50);
-			_rigidbody.AddRelativeTorque(_rotation*1.3f);
+			if (enableMovement) {
+				_rigidbody.AddRelativeForce(_movement*100);
+				_rigidbody.AddRelativeTorque(_rotation*1.3f);
+			}
 		}
 
 		private void OnEnable() {

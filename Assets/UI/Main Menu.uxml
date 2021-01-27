@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="SpaceShooterUIStyle.uss" />
+    <Style src="Dark.uss" />
+    <ui:VisualElement style="align-items: center; justify-content: center; bottom: auto; position: absolute; top: auto; height: 100%; width: 100%;">
+        <ui:VisualElement style="width: 75px;">
+            <ui:Button text="Start Game" display-tooltip-when-elided="true" focusable="true" name="start-game-button" />
+            <ui:Button text="Select Ship" display-tooltip-when-elided="true" tabindex="1" focusable="true" name="ship-selection-button" />
+            <ui:Button text="Settings" display-tooltip-when-elided="true" tabindex="1" focusable="true" name="settings-button" />
+            <ui:Button text="Quit Game" display-tooltip-when-elided="true" tabindex="2" focusable="true" name="quit-button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

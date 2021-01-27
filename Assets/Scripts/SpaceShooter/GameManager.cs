@@ -1,19 +1,25 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace SpaceShooter {
 	public class GameManager : MonoBehaviour {
-
+		
+		public List<GameObject> playerShips = new List<GameObject>();
+		public List<GameObject> enemyShips = new List<GameObject>();
+		
 		public bool enableNebulas = true;
-
+		
 		public Transform player;
-
+		
 		public Gradient nebulaColors;
 		public int chunkSize = 1000;
 		public Vector3 currentChunk;
 
-
+		public UIDocument uiDocument;
+		private VisualElement rootVisualElement;
+		
 		public GameObject nebula;
 		public int nebulaCount = 100;
 		public Material enemyEngineMat;
@@ -22,44 +28,76 @@ namespace SpaceShooter {
 		public Gradient enemyTrailGradient;
 		public Gradient playerTrailGradient;
 		public Gradient neutralTrailGradient;
-
+		
 		public static GameManager Instance;
-
+		
 		private List<Chunk> chunks = new List<Chunk>();
 		private List<Chunk> loadedChunks = new List<Chunk>();
 		//public int interval = 60;
-	
+		
 		//private int frameCount;
 		// Start is called before the first frame update
 		void Start() {
 			Instance = this;
+
+			rootVisualElement = uiDocument.rootVisualElement;
+			Button startGameButton = rootVisualElement.Q<Button>("start-game-button");
+			Button shipSelectionButton = rootVisualElement.Q<Button>("ship-selection-button");
+			Button settingsButton = rootVisualElement.Q<Button>("settings-button");
+			Button quitButton = rootVisualElement.Q<Button>("quit-button");
+
+			startGameButton.clickable.clicked += StartGame;
+			shipSelectionButton.clickable.clicked += ShipSelectMenu;
+			settingsButton.clickable.clicked += SettingsMenu;
+			quitButton.clickable.clicked += Quit;
+			
+			DontDestroyOnLoad(gameObject);
 			
 			currentChunk = Vector3.zero;
-			GetOrCreateCurrentChunk();
+			GetOrCreateCurrentChunks();
 		}
 
+		private void StartGame() {
+			
+		}
+
+		private void ShipSelectMenu() {
+			
+		}
+
+		private void SettingsMenu() {
+			
+		}
+
+		private void Quit() {
+#if UNITY_EDITOR
+			UnityEditor.EditorApplication.isPlaying = false;
+#endif
+			Application.Quit();
+		}
+		
 		// Update is called once per frame
 		void Update() {
 			if (player.transform.position.x > chunkSize * currentChunk.x + chunkSize) {
 				currentChunk.x += 1;
-				GetOrCreateCurrentChunk();
+				GetOrCreateCurrentChunks();
 			} else if (player.transform.position.y > chunkSize * currentChunk.y + chunkSize) {
 				currentChunk.y += 1;
-				GetOrCreateCurrentChunk();
+				GetOrCreateCurrentChunks();
 			} else if (player.transform.position.z > chunkSize * currentChunk.z + chunkSize) {
 				currentChunk.z += 1;
-				GetOrCreateCurrentChunk();
+				GetOrCreateCurrentChunks();
 			} else if (player.transform.position.x < chunkSize * currentChunk.x) {
 				currentChunk.x -= 1;
-				GetOrCreateCurrentChunk();
+				GetOrCreateCurrentChunks();
 			} else if (player.transform.position.y < chunkSize * currentChunk.y) {
 				currentChunk.y -= 1;
-				GetOrCreateCurrentChunk();
+				GetOrCreateCurrentChunks();
 			} else if (player.transform.position.z < chunkSize * currentChunk.z) {
 				currentChunk.z -= 1;
-				GetOrCreateCurrentChunk();
+				GetOrCreateCurrentChunks();
 			}
-
+			
 			Chunk[] list = loadedChunks.ToArray();
 			foreach (var chunk in list) {
 				if (Math.Abs(chunk.position.x - currentChunk.x) > 1) {
@@ -78,25 +116,58 @@ namespace SpaceShooter {
 					loadedChunks.Remove(chunk);
 				}
 			}
-
+			
 			/*if (frameCount >= interval) {
 			    GameObject nebula2 = Instantiate(nebula, new Vector3(Random.Range(-1000, 1000), Random.Range(-1000, 1000), Random.Range(-1000, 1000)), new Quaternion());
 			    nebula2.GetComponent<ParticleSystem>().startColor = Random.ColorHSV();
 		    }*/
 		}
 
-		private Chunk GetOrCreateCurrentChunk() {
+		private void GetOrCreateCurrentChunks() {
 			Chunk chunk;
-			using (chunk = GetChunkFromVector3(currentChunk)) {
-				if ((object)chunk == null) {
-					var go = new GameObject("Chunk X:" + currentChunk.x + " Y:" + currentChunk.y + " Z:" + currentChunk.z);
-					chunk = go.AddComponent<Chunk>();
-					chunk.Init(currentChunk);
-					chunks.Add(chunk);
-					loadedChunks.Add(chunk);
+			Vector3[] positions = new[] {
+				currentChunk,
+				new Vector3(currentChunk.x, currentChunk.y + 1, currentChunk.z),
+				new Vector3(currentChunk.x, currentChunk.y + 1, currentChunk.z + 1),
+				new Vector3(currentChunk.x, currentChunk.y, currentChunk.z + 1),
+				new Vector3(currentChunk.x, currentChunk.y - 1, currentChunk.z),
+				new Vector3(currentChunk.x, currentChunk.y - 1, currentChunk.z - 1),
+				new Vector3(currentChunk.x, currentChunk.y, currentChunk.z - 1),
+				new Vector3(currentChunk.x, currentChunk.y + 1, currentChunk.z - 1),
+				new Vector3(currentChunk.x, currentChunk.y - 1, currentChunk.z + 1),
+				
+				new Vector3(currentChunk.x + 1, currentChunk.y, currentChunk.z),
+				new Vector3(currentChunk.x + 1, currentChunk.y + 1, currentChunk.z),
+				new Vector3(currentChunk.x + 1, currentChunk.y + 1, currentChunk.z + 1),
+				new Vector3(currentChunk.x + 1, currentChunk.y, currentChunk.z + 1),
+				new Vector3(currentChunk.x + 1, currentChunk.y - 1, currentChunk.z),
+				new Vector3(currentChunk.x + 1, currentChunk.y - 1, currentChunk.z - 1),
+				new Vector3(currentChunk.x + 1, currentChunk.y, currentChunk.z - 1),
+				new Vector3(currentChunk.x + 1, currentChunk.y + 1, currentChunk.z - 1),
+				new Vector3(currentChunk.x + 1, currentChunk.y - 1, currentChunk.z + 1),
+				
+				new Vector3(currentChunk.x - 1, currentChunk.y, currentChunk.z),
+				new Vector3(currentChunk.x - 1, currentChunk.y + 1, currentChunk.z),
+				new Vector3(currentChunk.x - 1, currentChunk.y + 1, currentChunk.z + 1),
+				new Vector3(currentChunk.x - 1, currentChunk.y, currentChunk.z + 1),
+				new Vector3(currentChunk.x - 1, currentChunk.y - 1, currentChunk.z),
+				new Vector3(currentChunk.x - 1, currentChunk.y - 1, currentChunk.z - 1),
+				new Vector3(currentChunk.x - 1, currentChunk.y, currentChunk.z - 1),
+				new Vector3(currentChunk.x - 1, currentChunk.y + 1, currentChunk.z - 1),
+				new Vector3(currentChunk.x - 1, currentChunk.y - 1, currentChunk.z + 1)
+			};
+			foreach (var position in positions) {
+				using (chunk = GetChunkFromVector3(position)) {
+					if ((object)chunk == null) {
+						var go = new GameObject("Chunk X:" + position.x + " Y:" + position.y + " Z:" + position.z);
+						go.transform.SetParent(transform);
+						chunk = go.AddComponent<Chunk>();
+						chunk.Init(currentChunk);
+						chunks.Add(chunk);
+						loadedChunks.Add(chunk);
+					}
+					chunk.Load();
 				}
-				chunk.Load();
-				return chunk;
 			}
 		}
 
