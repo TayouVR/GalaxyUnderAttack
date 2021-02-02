@@ -9,6 +9,9 @@ namespace SpaceShooter {
 		
 		public List<GameObject> playerShips = new List<GameObject>();
 		public List<GameObject> enemyShips = new List<GameObject>();
+
+		private int currentShipIndex;
+		private GameObject[] displayedShips = new GameObject[5];
 		
 		public bool enableNebulas = true;
 		
@@ -18,9 +21,16 @@ namespace SpaceShooter {
 		public int chunkSize = 1000;
 		public Vector3 currentChunk;
 
-		public UIDocument uiDocument;
-		private VisualElement rootVisualElement;
+		// menus
+		[Header("UI")]
+		[SerializeField] private UIDocument menus;
+		private VisualElement mainMenu;
+		private VisualElement shipSelectionMenu;
+		private VisualElement settingsMenu;
+		private VisualElement hud;
 		
+		// values for other classes to work on
+		[Header("Global things")]
 		public GameObject nebula;
 		public int nebulaCount = 100;
 		public Material enemyEngineMat;
@@ -34,23 +44,15 @@ namespace SpaceShooter {
 		
 		private List<Chunk> chunks = new List<Chunk>();
 		private List<Chunk> loadedChunks = new List<Chunk>();
-		//public int interval = 60;
+
+		public CameraFollow cameraFollow;
 		
-		//private int frameCount;
-		// Start is called before the first frame update
 		void Start() {
 			Instance = this;
 
-			rootVisualElement = uiDocument.rootVisualElement;
-			Button startGameButton = rootVisualElement.Q<Button>("start-game-button");
-			Button shipSelectionButton = rootVisualElement.Q<Button>("ship-selection-button");
-			Button settingsButton = rootVisualElement.Q<Button>("settings-button");
-			Button quitButton = rootVisualElement.Q<Button>("quit-button");
+			cameraFollow = GetComponent<CameraFollow>();
 
-			startGameButton.clickable.clicked += StartGame;
-			shipSelectionButton.clickable.clicked += ShipSelectMenu;
-			settingsButton.clickable.clicked += SettingsMenu;
-			quitButton.clickable.clicked += Quit;
+			SetupMenus();
 			
 			DontDestroyOnLoad(gameObject);
 			
@@ -58,18 +60,52 @@ namespace SpaceShooter {
 			GetOrCreateCurrentChunks();
 		}
 
+		private void SetupMenus() {
+			// main menu
+			mainMenu = menus.rootVisualElement.Q<VisualElement>("main-menu");
+			mainMenu.Q<Button>("start-game-button").clickable.clicked += StartGame;
+			mainMenu.Q<Button>("ship-selection-button").clickable.clicked += ToShipSelectionMenu;
+			mainMenu.Q<Button>("settings-button").clickable.clicked += () => SetMenuTo(settingsMenu);
+			mainMenu.Q<Button>("quit-button").clickable.clicked += Quit;
+
+			// ship selection menu
+			shipSelectionMenu = menus.rootVisualElement.Q<VisualElement>("ship-selection-menu");
+			shipSelectionMenu.Q<Button>("select-ship-button").clickable.clicked += StartGame;
+			shipSelectionMenu.Q<Button>("details-button").clickable.clicked += StartGame;
+			shipSelectionMenu.Q<Button>("back-to-main-menu-button").clickable.clicked += () => SetMenuTo(mainMenu);
+
+			// Settings
+			settingsMenu = menus.rootVisualElement.Q<VisualElement>("settings-menu");
+			settingsMenu.Q<Button>("back-to-main-menu-button").clickable.clicked += () => SetMenuTo(mainMenu);
+			
+			// HUD
+			hud = menus.rootVisualElement.Q<VisualElement>("hud");
+
+			SetMenuTo(mainMenu);
+
+		}
+
+		private void ToShipSelectionMenu() {
+			for (int i = -2; i < 2; i++) {
+				if (playerShips[currentShipIndex - 2]) {
+					displayedShips[i + 2] = Instantiate(playerShips[currentShipIndex - 2]);
+				}
+			}
+			SetMenuTo(shipSelectionMenu);
+		}
+
+		private void SetMenuTo(VisualElement menu) {
+			mainMenu.visible = mainMenu == menu;
+			shipSelectionMenu.visible = shipSelectionMenu == menu;
+			settingsMenu.visible = settingsMenu == menu;
+			hud.visible = hud == menu;
+		}
+
 		private void StartGame() {
 			Cursor.lockState = CursorLockMode.Locked;
-			uiDocument.enabled = false;
+			SetMenuTo(hud);
+			cameraFollow.enabled = true;
 			player.GetComponent<Player>().Init();
-		}
-
-		private void ShipSelectMenu() {
-			
-		}
-
-		private void SettingsMenu() {
-			
 		}
 
 		private void Quit() {
@@ -81,6 +117,12 @@ namespace SpaceShooter {
 		
 		// Update is called once per frame
 		void Update() {
+
+			currentChunk.x = (int)Math.Floor((player.transform.position.x - (player.transform.position.x % chunkSize)) / chunkSize);
+			currentChunk.y = (int)Math.Floor((player.transform.position.y - (player.transform.position.y % chunkSize)) / chunkSize);
+			currentChunk.z = (int)Math.Floor((player.transform.position.z - (player.transform.position.z % chunkSize)) / chunkSize);
+			
+			/*
 			if (player.transform.position.x > chunkSize * currentChunk.x + chunkSize) {
 				currentChunk.x += 1;
 				GetOrCreateCurrentChunks();
@@ -99,7 +141,7 @@ namespace SpaceShooter {
 			} else if (player.transform.position.z < chunkSize * currentChunk.z) {
 				currentChunk.z -= 1;
 				GetOrCreateCurrentChunks();
-			}
+			}*/
 			
 			Chunk[] list = loadedChunks.ToArray();
 			foreach (var chunk in list) {

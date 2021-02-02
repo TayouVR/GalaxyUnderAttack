@@ -14,6 +14,7 @@
       <Path>Library/PackageCache/com.unity.textcore@1.0.0-preview.2</Path>
       <Path>Library/PackageCache/com.unity.textmeshpro@3.0.3</Path>
       <Path>Library/PackageCache/com.unity.timeline@1.4.4</Path>
+      <Path>Library/PackageCache/com.unity.timeline@1.4.6</Path>
       <Path>Library/PackageCache/com.unity.ui.builder@1.0.0-preview.12</Path>
       <Path>Library/PackageCache/com.unity.ui@1.0.0-preview.13</Path>
       <Path>Library/PackageCache/nuget.castle-core@1.0.1</Path>
@@ -28,6 +29,7 @@
       <Path>Library</Path>
       <Path>Logs</Path>
       <Path>Temp</Path>
+      <Path>UIElementsSchema</Path>
       <Path>UserSettings</Path>
       <Path>obj</Path>
     </explicitExcludes>

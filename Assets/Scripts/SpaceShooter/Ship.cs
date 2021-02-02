@@ -7,19 +7,21 @@ namespace SpaceShooter {
 		public Fraction fraction;
 
 		public Renderer mesh;
-		public Transform[] weapons;
-
-		public Transform[] turretMounts;
-		
 		public int engineMatIndex;
-
+		
+		public Transform[] weapons;
+		public Transform[] turretMounts;
 		public TrailRenderer[] engineTrails;
+		
 		private static readonly int EmissionColor = Shader.PropertyToID("_EmissionColor");
 		private static readonly int Color = Shader.PropertyToID("_Color");
 
 
 		// Start is called before the first frame update
 		void Start() {
+			if (mesh is null) {
+				mesh = GetComponentInChildren<MeshRenderer>();
+			}
 			SetFractionAspects();
 		}
 

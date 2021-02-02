@@ -1,0 +1,34 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="SpaceShooterUIStyle.uss" />
+    <ui:VisualElement name="root" style="width: 100%; height: 100%; position: absolute;">
+        <ui:VisualElement name="ship-selection-menu" style="align-items: center; justify-content: flex-end; height: 100%; position: absolute; width: 100%;">
+            <ui:Button text="&lt;" display-tooltip-when-elided="true" name="ship-page-left" class="page-button undecorated" style="left: 0;" />
+            <ui:Button text="&gt;" display-tooltip-when-elided="true" name="ship-page-right" class="page-button undecorated" style="right: 0;" />
+            <ui:VisualElement class="MenuContainer" style="flex-direction: row; justify-content: center; height: 20%; width: 80%; align-items: center;">
+                <ui:Button text="Select Ship" display-tooltip-when-elided="true" focusable="true" name="select-ship-button" style="width: 33.333%;" />
+                <ui:Button text="Details" display-tooltip-when-elided="true" tabindex="1" focusable="true" name="details-button" style="width: 33.333%;" />
+                <ui:Button text="Back" display-tooltip-when-elided="true" tabindex="1" focusable="true" name="back-to-main-menu-button" style="width: 33.333%;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="settings-menu" style="justify-content: center; align-items: center; width: 100%; height: 100%; position: absolute;">
+            <ui:VisualElement style="width: 80%; height: 80%; justify-content: space-around; align-items: stretch;">
+                <ui:VisualElement style="width: 20%; height: 100%;">
+                    <ui:Button text="Graphics&#10;" display-tooltip-when-elided="true" name="graphics" style="width: 100%; height: 20%;" />
+                    <ui:Button text="Player&#10;" display-tooltip-when-elided="true" name="player" style="width: 100%; height: 20%;" />
+                    <ui:Button text="Audio&#10;" display-tooltip-when-elided="true" name="audio" style="width: 100%; height: 20%;" />
+                    <ui:Button text="Controls&#10;" display-tooltip-when-elided="true" name="controls" style="width: 100%; height: 20%;" />
+                    <ui:Button text="Back&#10;" display-tooltip-when-elided="true" name="back-to-main-menu-button" style="width: 100%; height: 20%;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="main-menu" style="align-items: center; justify-content: center; bottom: auto; position: absolute; top: auto; height: 100%; width: 100%;">
+            <ui:VisualElement class="MenuContainer">
+                <ui:Button text="Start Game" display-tooltip-when-elided="true" focusable="true" name="start-game-button" class="undecorated" />
+                <ui:Button text="Select Ship" display-tooltip-when-elided="true" tabindex="1" focusable="true" name="ship-selection-button" class="mainMenuButton undecorated" />
+                <ui:Button text="Settings" display-tooltip-when-elided="true" tabindex="1" focusable="true" name="settings-button" class="mainMenuButton undecorated" />
+                <ui:Button text="Quit Game" display-tooltip-when-elided="true" tabindex="2" focusable="true" name="quit-button" class="mainMenuButton undecorated" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="hud" style="width: 100%; height: 100%;" />
+    </ui:VisualElement>
+</ui:UXML>
