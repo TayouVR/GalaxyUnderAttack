@@ -28,6 +28,8 @@ namespace SpaceShooter {
 		private VisualElement shipSelectionMenu;
 		private VisualElement settingsMenu;
 		private VisualElement hud;
+		private Button shipPageLeftButton;
+		private Button shipPageRightButton;
 		
 		// values for other classes to work on
 		[Header("Global things")]
@@ -70,6 +72,10 @@ namespace SpaceShooter {
 
 			// ship selection menu
 			shipSelectionMenu = menus.rootVisualElement.Q<VisualElement>("ship-selection-menu");
+			shipPageRightButton = shipSelectionMenu.Q<Button>("ship-page-right");
+			shipPageLeftButton = shipSelectionMenu.Q<Button>("ship-page-left");
+			shipPageRightButton.clickable.clicked +=  () => SwitchCurrentShipSelection(1);
+			shipPageLeftButton.clickable.clicked += () => SwitchCurrentShipSelection(-1);
 			shipSelectionMenu.Q<Button>("select-ship-button").clickable.clicked += StartGame;
 			shipSelectionMenu.Q<Button>("details-button").clickable.clicked += StartGame;
 			shipSelectionMenu.Q<Button>("back-to-main-menu-button").clickable.clicked += () => SetMenuTo(mainMenu);
@@ -86,12 +92,43 @@ namespace SpaceShooter {
 		}
 
 		private void ToShipSelectionMenu() {
-			for (int i = -2; i < 2; i++) {
-				if (playerShips[currentShipIndex - 2]) {
-					displayedShips[i + 2] = Instantiate(playerShips[currentShipIndex - 2]);
+			SwitchCurrentShipSelection(0);
+			
+			SetMenuTo(shipSelectionMenu);
+		}
+
+		private void SwitchCurrentShipSelection(int shiftIndex) {
+			int maxIndex = displayedShips.Length - 1; // on 5 elements this is 4
+			int minIndex = 0; // this is always 0
+			
+			// return if  index would be < 0 or > length
+			if (currentShipIndex + shiftIndex < 0 || currentShipIndex + shiftIndex >= playerShips.Count) return;
+			
+			currentShipIndex += shiftIndex;
+			
+			
+			//Debug.Log("----------------- " + currentShipIndex + " ----------------");
+
+			GameObject[] shiftedShips = new GameObject[5];
+			if (shiftIndex != 0) {
+				Destroy(displayedShips[shiftIndex > 0 ? minIndex : maxIndex]);
+			}
+			Array.Copy(displayedShips, shiftIndex >= 1 ? shiftIndex : 0, shiftedShips, shiftIndex <= 0 ? Math.Abs(shiftIndex) : 0, maxIndex);
+			
+			for (int i = 0, j = -2; i <= maxIndex; i++, j++) {
+				if ((object)shiftedShips[i] != null) {
+					shiftedShips[i].transform.position = Vector3.Lerp(shiftedShips[i].transform.position, new Vector3((i - 2) * 20, 0, 0), 1);
+					//Debug.Log("Moved ship: " + i + " " + shiftedShips[i]);
+				} else if (currentShipIndex + j >= 0 && currentShipIndex + j < playerShips.Count && (object)playerShips[currentShipIndex + j] != null) {
+					GameObject temp = shiftedShips[i] = Instantiate(playerShips[currentShipIndex + j]);
+					temp.transform.position = new Vector3(j * 20, 0, 0);
+					//Debug.Log("Spawned New Ship: " + i + " " + shiftedShips[i]);
 				}
 			}
-			SetMenuTo(shipSelectionMenu);
+			displayedShips = shiftedShips;
+
+			shipPageRightButton.visible = currentShipIndex + 1 < playerShips.Count;
+			shipPageLeftButton.visible = currentShipIndex - 1 >= 0;
 		}
 
 		private void SetMenuTo(VisualElement menu) {

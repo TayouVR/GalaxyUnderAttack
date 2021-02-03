@@ -193,7 +193,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1419367309697596096}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 20, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3132020082720016197}
@@ -221,6 +221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fraction: 0
   mesh: {fileID: 6602217245039865417}
+  engineMatIndex: 1
   weapons:
   - {fileID: 8317989184410920643}
   - {fileID: 5040962627947624231}
@@ -228,7 +229,6 @@ MonoBehaviour:
   - {fileID: 7805814116397463959}
   turretMounts:
   - {fileID: 3046781202087912432}
-  engineMatIndex: 1
   engineTrails:
   - {fileID: 2266422071323953029}
   - {fileID: 2266422071149670011}
