@@ -18,9 +18,9 @@ namespace SpaceShooter {
 		private static readonly int EmissionColor = Shader.PropertyToID("_EmissionColor");
 		private static readonly int Color = Shader.PropertyToID("_Color");
 
-
 		// Start is called before the first frame update
 		void Start() {
+			weaponComponents = new Weapon[weapons.Length];
 			if (mesh is null) {
 				mesh = GetComponentInChildren<MeshRenderer>();
 			}
@@ -29,7 +29,9 @@ namespace SpaceShooter {
 
 		public void Shoot() {
 			foreach (var weapon in weaponComponents) {
-				weapon.Shoot();
+				if (weapon != null) {
+					weapon.Shoot();
+				}
 			}
 		}
 

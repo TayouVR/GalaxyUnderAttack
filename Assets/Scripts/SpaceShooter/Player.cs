@@ -32,6 +32,12 @@ namespace SpaceShooter {
 			_inputActions.ShipControls.Roll.performed += context => _rotation.z = -context.ReadValue<float>()*5;
 		}
 
+		public void SetWeapon(int index, GameObject prefab) {
+			if ((object)spawnedShipShip != null) {
+				spawnedShipShip.weaponComponents[index] = Instantiate(prefab, spawnedShipShip.weapons[index]).GetComponent<Weapon>();
+			}
+		}
+
 		public void PrimaryShoot() {
 			if ((object)spawnedShipShip != null) {
 				spawnedShipShip.Shoot();

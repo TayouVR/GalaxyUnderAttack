@@ -10,6 +10,7 @@ namespace SpaceShooter {
 		
 		public List<GameObject> playerShips = new List<GameObject>();
 		public List<GameObject> enemyShips = new List<GameObject>();
+		public List<GameObject> weapons = new List<GameObject>();
 
 		private int currentShipIndex;
 		private GameObject[] displayedShips = new GameObject[5];
@@ -157,10 +158,16 @@ namespace SpaceShooter {
 			playerComp.Init();
 			playerComp.SetShip(playerShips[currentShipIndex]);
 
+			foreach (var ship in displayedShips) {
+				Destroy(ship);
+			}
+			
+			playerComp.SetWeapon(0, weapons[0]);
+
 			InputActions inputActions = new InputActions();
 
-			inputActions.ShipControls.PrimaryFire.performed += delegate(InputAction.CallbackContext context) { playerComp.PrimaryShoot(); };
-			inputActions.ShipControls.PrimaryFire.performed += delegate(InputAction.CallbackContext context) { playerComp.SecondaryShoot(); };
+			inputActions.ShipControls.PrimaryFire.performed += delegate { playerComp.PrimaryShoot(); };
+			inputActions.ShipControls.PrimaryFire.performed += delegate { playerComp.SecondaryShoot(); };
 		}
 
 		private void Quit() {
