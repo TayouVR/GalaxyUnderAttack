@@ -13,6 +13,9 @@ namespace SpaceShooter {
 
 		private bool enableMovement;
 
+		private GameObject spawnedShip;
+		private Ship spawnedShipShip;
+
 		private void Awake() {
 		
 			_rigidbody = GetComponent<Rigidbody>();
@@ -29,12 +32,33 @@ namespace SpaceShooter {
 			_inputActions.ShipControls.Roll.performed += context => _rotation.z = -context.ReadValue<float>()*5;
 		}
 
+		public void PrimaryShoot() {
+			if ((object)spawnedShipShip != null) {
+				spawnedShipShip.Shoot();
+			}
+		}
+
+		public void SecondaryShoot() {
+			if ((object)spawnedShipShip != null) {
+				spawnedShipShip.Shoot();
+			}
+		}
+
 		public void Init() {
 			enableMovement = true;
 		}
 
 		public void Pause() {
 			enableMovement = false;
+		}
+
+		public void SetShip(GameObject shipPrefab) {
+			if ((object)spawnedShip != null) {
+				Destroy(spawnedShip);
+			}
+			spawnedShip = Instantiate(shipPrefab, transform);
+			spawnedShipShip = spawnedShip.GetComponent<Ship>();
+			spawnedShipShip.fraction = Ship.Fraction.PLAYER;
 		}
 
 		// Update is called once per frame

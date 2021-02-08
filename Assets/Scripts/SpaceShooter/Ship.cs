@@ -10,6 +10,8 @@ namespace SpaceShooter {
 		public int engineMatIndex;
 		
 		public Transform[] weapons;
+		public Weapon[] weaponComponents;
+		
 		public Transform[] turretMounts;
 		public TrailRenderer[] engineTrails;
 		
@@ -25,10 +27,10 @@ namespace SpaceShooter {
 			SetFractionAspects();
 		}
 
-		// Update is called once per frame
-		void Update()
-		{
-        
+		public void Shoot() {
+			foreach (var weapon in weaponComponents) {
+				weapon.Shoot();
+			}
 		}
 
 		private void SetFractionAspects() {

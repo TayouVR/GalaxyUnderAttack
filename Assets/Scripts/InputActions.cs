@@ -65,6 +65,22 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""PrimaryFire"",
+                    ""type"": ""Button"",
+                    ""id"": ""6a60b108-aced-4d83-b2d6-8883ec79ec30"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""SecondaryFire"",
+                    ""type"": ""Button"",
+                    ""id"": ""9bf5eb3f-fa17-4510-9180-33c212e4d988"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -263,6 +279,50 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""RotateUpDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1bb821ed-c379-4aa6-a009-f98a24fcca29"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PrimaryFire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6c0271f2-3739-477b-bcd9-45aa121a591b"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PrimaryFire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bb71a6d6-33f3-491e-90e0-c56ba03f04c3"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SecondaryFire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""089f23a8-c967-4755-b8be-6166f64aaad3"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SecondaryFire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -574,6 +634,8 @@ public class @InputActions : IInputActionCollection, IDisposable
         m_ShipControls_MoveLeftRight = m_ShipControls.FindAction("MoveLeftRight", throwIfNotFound: true);
         m_ShipControls_RotateLeftRight = m_ShipControls.FindAction("RotateLeftRight", throwIfNotFound: true);
         m_ShipControls_RotateUpDown = m_ShipControls.FindAction("RotateUpDown", throwIfNotFound: true);
+        m_ShipControls_PrimaryFire = m_ShipControls.FindAction("PrimaryFire", throwIfNotFound: true);
+        m_ShipControls_SecondaryFire = m_ShipControls.FindAction("SecondaryFire", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Tab = m_UI.FindAction("Tab", throwIfNotFound: true);
@@ -640,6 +702,8 @@ public class @InputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_ShipControls_MoveLeftRight;
     private readonly InputAction m_ShipControls_RotateLeftRight;
     private readonly InputAction m_ShipControls_RotateUpDown;
+    private readonly InputAction m_ShipControls_PrimaryFire;
+    private readonly InputAction m_ShipControls_SecondaryFire;
     public struct ShipControlsActions
     {
         private @InputActions m_Wrapper;
@@ -650,6 +714,8 @@ public class @InputActions : IInputActionCollection, IDisposable
         public InputAction @MoveLeftRight => m_Wrapper.m_ShipControls_MoveLeftRight;
         public InputAction @RotateLeftRight => m_Wrapper.m_ShipControls_RotateLeftRight;
         public InputAction @RotateUpDown => m_Wrapper.m_ShipControls_RotateUpDown;
+        public InputAction @PrimaryFire => m_Wrapper.m_ShipControls_PrimaryFire;
+        public InputAction @SecondaryFire => m_Wrapper.m_ShipControls_SecondaryFire;
         public InputActionMap Get() { return m_Wrapper.m_ShipControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -677,6 +743,12 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @RotateUpDown.started -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnRotateUpDown;
                 @RotateUpDown.performed -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnRotateUpDown;
                 @RotateUpDown.canceled -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnRotateUpDown;
+                @PrimaryFire.started -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnPrimaryFire;
+                @PrimaryFire.performed -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnPrimaryFire;
+                @PrimaryFire.canceled -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnPrimaryFire;
+                @SecondaryFire.started -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnSecondaryFire;
+                @SecondaryFire.performed -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnSecondaryFire;
+                @SecondaryFire.canceled -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnSecondaryFire;
             }
             m_Wrapper.m_ShipControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -699,6 +771,12 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @RotateUpDown.started += instance.OnRotateUpDown;
                 @RotateUpDown.performed += instance.OnRotateUpDown;
                 @RotateUpDown.canceled += instance.OnRotateUpDown;
+                @PrimaryFire.started += instance.OnPrimaryFire;
+                @PrimaryFire.performed += instance.OnPrimaryFire;
+                @PrimaryFire.canceled += instance.OnPrimaryFire;
+                @SecondaryFire.started += instance.OnSecondaryFire;
+                @SecondaryFire.performed += instance.OnSecondaryFire;
+                @SecondaryFire.canceled += instance.OnSecondaryFire;
             }
         }
     }
@@ -817,6 +895,8 @@ public class @InputActions : IInputActionCollection, IDisposable
         void OnMoveLeftRight(InputAction.CallbackContext context);
         void OnRotateLeftRight(InputAction.CallbackContext context);
         void OnRotateUpDown(InputAction.CallbackContext context);
+        void OnPrimaryFire(InputAction.CallbackContext context);
+        void OnSecondaryFire(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

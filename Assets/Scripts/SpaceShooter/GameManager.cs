@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 using Cursor = UnityEngine.Cursor;
 
@@ -88,7 +89,6 @@ namespace SpaceShooter {
 			hud = menus.rootVisualElement.Q<VisualElement>("hud");
 
 			SetMenuTo(mainMenu);
-
 		}
 
 		private void ToShipSelectionMenu() {
@@ -117,10 +117,21 @@ namespace SpaceShooter {
 			
 			for (int i = 0, j = -2; i <= maxIndex; i++, j++) {
 				if ((object)shiftedShips[i] != null) {
-					shiftedShips[i].transform.position = Vector3.Lerp(shiftedShips[i].transform.position, new Vector3((i - 2) * 20, 0, 0), 1);
+					using (LerpHelper lh = shiftedShips[i].GetComponent<LerpHelper>()) {
+						if (lh is null) {
+							// this should never happen
+							var temp = shiftedShips[i].AddComponent<LerpHelper>();
+							temp.target = new Vector3(j * 20, 0, 0);
+						} else {
+							lh.target = new Vector3(j * 20, 0, 0);
+						}
+					}
+					//shiftedShips[i].transform.position = Vector3.Lerp(shiftedShips[i].transform.position, new Vector3((i - 2) * 20, 0, 0), 1);
 					//Debug.Log("Moved ship: " + i + " " + shiftedShips[i]);
 				} else if (currentShipIndex + j >= 0 && currentShipIndex + j < playerShips.Count && (object)playerShips[currentShipIndex + j] != null) {
 					GameObject temp = shiftedShips[i] = Instantiate(playerShips[currentShipIndex + j]);
+					var lh = temp.AddComponent<LerpHelper>();
+					lh.target = new Vector3(j * 20, 0, 0);
 					temp.transform.position = new Vector3(j * 20, 0, 0);
 					//Debug.Log("Spawned New Ship: " + i + " " + shiftedShips[i]);
 				}
@@ -142,7 +153,14 @@ namespace SpaceShooter {
 			Cursor.lockState = CursorLockMode.Locked;
 			SetMenuTo(hud);
 			cameraFollow.enabled = true;
-			player.GetComponent<Player>().Init();
+			var playerComp = player.GetComponent<Player>();
+			playerComp.Init();
+			playerComp.SetShip(playerShips[currentShipIndex]);
+
+			InputActions inputActions = new InputActions();
+
+			inputActions.ShipControls.PrimaryFire.performed += delegate(InputAction.CallbackContext context) { playerComp.PrimaryShoot(); };
+			inputActions.ShipControls.PrimaryFire.performed += delegate(InputAction.CallbackContext context) { playerComp.SecondaryShoot(); };
 		}
 
 		private void Quit() {
