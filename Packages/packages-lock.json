@@ -24,10 +24,12 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.visualstudio": {
-      "version": "2.0.5",
+      "version": "2.0.7",
       "depth": 0,
       "source": "registry",
-      "dependencies": {},
+      "dependencies": {
+        "com.unity.test-framework": "1.1.9"
+      },
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.vscode": {
@@ -45,7 +47,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.postprocessing": {
-      "version": "2.3.0",
+      "version": "3.0.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
@@ -70,7 +72,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.textmeshpro": {
-      "version": "3.0.3",
+      "version": "3.0.4",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -100,12 +102,10 @@
       }
     },
     "com.unity.ui": {
-      "version": "1.0.0-preview.13",
+      "version": "1.0.0-preview.14",
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "nuget.moq": "1.0.0",
-        "nuget.castle-core": "1.0.1",
         "com.unity.modules.uielementsnative": "1.0.0",
         "com.unity.textcore": "1.0.0-preview.2"
       },
@@ -116,22 +116,6 @@
       "depth": 0,
       "source": "registry",
       "dependencies": {},
-      "url": "https://packages.unity.com"
-    },
-    "nuget.castle-core": {
-      "version": "1.0.1",
-      "depth": 1,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://packages.unity.com"
-    },
-    "nuget.moq": {
-      "version": "1.0.0",
-      "depth": 1,
-      "source": "registry",
-      "dependencies": {
-        "nuget.castle-core": "1.0.1"
-      },
       "url": "https://packages.unity.com"
     },
     "com.unity.modules.ai": {
