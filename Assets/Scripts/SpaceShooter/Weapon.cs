@@ -19,7 +19,7 @@ namespace SpaceShooter {
 
         public void Shoot() {
             GameObject flyingProjectile = Instantiate(projectile, transform.position, transform.rotation);
-            flyingProjectile.GetComponent<Rigidbody>().AddForce(Vector3.forward * 20);
+            flyingProjectile.GetComponent<Rigidbody>().AddForce(transform.forward * 20);
         }
     }
 }
