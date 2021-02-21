@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 namespace SpaceShooter {
 	[RequireComponent(typeof(Rigidbody))]
-	public class Player : MonoBehaviour {
+	public class Player : MonoBehaviour, IShipOwner {
 	
 		private InputActions _inputActions;
 
@@ -102,6 +102,10 @@ namespace SpaceShooter {
 
 		private void OnDisable() {
 			_inputActions.Disable();
+		}
+
+		public void Die() {
+			Destroy(gameObject);
 		}
 	}
 }

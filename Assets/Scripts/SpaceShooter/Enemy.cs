@@ -4,13 +4,13 @@ using Random = UnityEngine.Random;
 
 namespace SpaceShooter {
 	[RequireComponent(typeof(Rigidbody))]
-	public class Enemy : MonoBehaviour {
+	public class Enemy : MonoBehaviour, IShipOwner {
 
 		private bool isTargetInSight;
 		private Transform player;
 
 		private Rigidbody _rigidbody;
-		
+
 		// Start is called before the first frame update
 		void Start() {
 			_rigidbody = GetComponent<Rigidbody>();
@@ -37,6 +37,10 @@ namespace SpaceShooter {
 			if (other.GetComponent<Player>()) {
 				isTargetInSight = false;
 			}
+		}
+
+		public void Die() {
+			Destroy(gameObject);
 		}
 	}
 }

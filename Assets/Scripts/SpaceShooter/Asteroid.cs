@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 
 namespace SpaceShooter {
-	public class Asteroid : MonoBehaviour {
-		
+	public class Asteroid : Destructible {
 	}
 }

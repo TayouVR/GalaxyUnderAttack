@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 namespace SpaceShooter {
-	public class Ship : MonoBehaviour {
+	public class Ship : Destructible {
 
 		public Fraction fraction;
 
@@ -64,6 +64,17 @@ namespace SpaceShooter {
 				//trail.material.SetColor(EmissionColor, mat.color);
 			}
 		}
+		
+		protected void Destruct() {
+			IShipOwner shipOwner = transform.parent.GetComponent<IShipOwner>();
+			
+			if (shipOwner is null) {
+				base.Destruct();
+			} else {
+				shipOwner.Die();
+			}
+		}
+		
 		
 		public enum Fraction {
 			PLAYER,
