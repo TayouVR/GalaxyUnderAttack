@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec670a6ac3374b58bde6bc07cc9eb425, type: 3}
+  m_Name: Alien Mothership
+  m_EditorClassIdentifier: 
+  dropList:
+  - element: {fileID: 11400000, guid: ac49db0f9e297c34db778189bd161cc5, type: 2}
+    maxAmount: 0
+    chance: 0
+  - element: {fileID: 11400000, guid: 9d4e8bb4a0cc5584ca2974fe0ea9855a, type: 2}
+    maxAmount: 0
+    chance: 0
