@@ -161,13 +161,12 @@ namespace SpaceShooter {
 			foreach (var ship in displayedShips) {
 				Destroy(ship);
 			}
-			
-			playerComp.SetWeapon(0, weapons[0]);
 
-			InputActions inputActions = new InputActions();
+			for (var i = 0; i < playerShips[currentShipIndex].GetComponent<Ship>().weapons.Length; i++) {
+				playerComp.SetWeapon(i, weapons[0]);
+			}
 
-			inputActions.ShipControls.PrimaryFire.performed += delegate { playerComp.PrimaryShoot(); };
-			inputActions.ShipControls.PrimaryFire.performed += delegate { playerComp.SecondaryShoot(); };
+			//playerComp.SetWeapon(1, weapons[0]);
 		}
 
 		private void Quit() {

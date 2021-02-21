@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace SpaceShooter {
 	[RequireComponent(typeof(Rigidbody))]
@@ -34,17 +36,29 @@ namespace SpaceShooter {
 
 		public void SetWeapon(int index, GameObject prefab) {
 			if ((object)spawnedShipShip != null) {
+				if (spawnedShipShip.weaponComponents.Length == 0) {
+					spawnedShipShip.weaponComponents = new Weapon[spawnedShipShip.weapons.Length];
+				}
 				spawnedShipShip.weaponComponents[index] = Instantiate(prefab, spawnedShipShip.weapons[index]).GetComponent<Weapon>();
 			}
 		}
 
-		public void PrimaryShoot() {
+		public void PrimaryShoot(InputAction.CallbackContext context) {
 			if ((object)spawnedShipShip != null) {
 				spawnedShipShip.Shoot();
 			}
 		}
+		
+		IEnumerator Fire() {
+			while (_inputActions.ShipControls.PrimaryFire.ReadValue<float>() >= 0.5f) {
+				if ((object)spawnedShipShip != null) {
+					spawnedShipShip.Shoot();
+				}
+				yield return new WaitForSeconds(0.5f);
+			}
+		}
 
-		public void SecondaryShoot() {
+		public void SecondaryShoot(InputAction.CallbackContext context) {
 			if ((object)spawnedShipShip != null) {
 				spawnedShipShip.Shoot();
 			}
@@ -52,10 +66,17 @@ namespace SpaceShooter {
 
 		public void Init() {
 			enableMovement = true;
+
+			_inputActions.ShipControls.PrimaryFire.performed += PrimaryShoot;
+			_inputActions.ShipControls.SecondaryFire.performed += SecondaryShoot;
+			//StartCoroutine(Fire());
 		}
 
 		public void Pause() {
 			enableMovement = false;
+
+			_inputActions.ShipControls.PrimaryFire.performed -= PrimaryShoot;
+			_inputActions.ShipControls.SecondaryFire.performed -= SecondaryShoot;
 		}
 
 		public void SetShip(GameObject shipPrefab) {
