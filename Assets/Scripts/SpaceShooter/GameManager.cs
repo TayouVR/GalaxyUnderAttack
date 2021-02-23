@@ -67,7 +67,7 @@ namespace SpaceShooter {
 		private void SetupMenus() {
 			// main menu
 			mainMenu = menus.rootVisualElement.Q<VisualElement>("main-menu");
-			mainMenu.Q<Button>("start-game-button").clickable.clicked += StartGame;
+			//mainMenu.Q<Button>("start-game-button").clickable.clicked += StartGame;
 			mainMenu.Q<Button>("ship-selection-button").clickable.clicked += ToShipSelectionMenu;
 			mainMenu.Q<Button>("settings-button").clickable.clicked += () => SetMenuTo(settingsMenu);
 			mainMenu.Q<Button>("quit-button").clickable.clicked += Quit;

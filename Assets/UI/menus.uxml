@@ -2,36 +2,46 @@
     <Style src="SpaceShooterUIStyle.uss" />
     <ui:VisualElement name="root" style="width: 100%; height: 100%; position: absolute;">
         <ui:VisualElement name="ship-selection-menu" style="align-items: center; justify-content: flex-end; height: 100%; position: absolute; width: 100%;">
-            <ui:Button text="&lt;" display-tooltip-when-elided="true" name="ship-page-left" class="page-button undecorated" style="left: 0;" />
-            <ui:Button text="&gt;" display-tooltip-when-elided="true" name="ship-page-right" class="page-button undecorated" style="right: 0;" />
-            <ui:VisualElement class="MenuContainer" style="flex-direction: row; justify-content: center; height: 20%; width: 80%; align-items: center;">
+            <ui:Button text="&lt;" display-tooltip-when-elided="true" name="ship-page-left" class="page-button" style="left: 0;" />
+            <ui:Button text="&gt;" display-tooltip-when-elided="true" name="ship-page-right" class="page-button" style="right: 0;" />
+            <ui:VisualElement class="MenuContainer" style="flex-direction: row; justify-content: center; height: 15%; width: 100%; align-items: center; position: absolute; background-color: rgba(12, 12, 12, 0.38);">
                 <ui:Button text="Select Ship" display-tooltip-when-elided="true" focusable="true" name="select-ship-button" style="width: 33.333%;" />
                 <ui:Button text="Details" display-tooltip-when-elided="true" tabindex="1" focusable="true" name="details-button" style="width: 33.333%;" />
                 <ui:Button text="Back" display-tooltip-when-elided="true" tabindex="1" focusable="true" name="back-to-main-menu-button" style="width: 33.333%;" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="settings-menu" style="justify-content: center; align-items: center; width: 100%; height: 100%; position: absolute;">
-            <ui:VisualElement style="width: 80%; height: 80%; justify-content: space-around; align-items: stretch;">
-                <ui:VisualElement style="width: 20%; height: 100%;">
-                    <ui:Button text="Graphics&#10;" display-tooltip-when-elided="true" name="graphics" style="width: 100%; height: 20%;" />
-                    <ui:Button text="Player&#10;" display-tooltip-when-elided="true" name="player" style="width: 100%; height: 20%;" />
-                    <ui:Button text="Audio&#10;" display-tooltip-when-elided="true" name="audio" style="width: 100%; height: 20%;" />
-                    <ui:Button text="Controls&#10;" display-tooltip-when-elided="true" name="controls" style="width: 100%; height: 20%;" />
+            <ui:VisualElement style="width: 90%; height: 90%; justify-content: space-around; align-items: stretch;">
+                <ui:VisualElement style="width: 300px; height: 100%;">
+                    <ui:Button text="Graphics&#10;" display-tooltip-when-elided="true" name="graphics" class="iconed-button" style="width: 100%; height: 20%;">
+                        <ui:Label text="🔲&#10;" display-tooltip-when-elided="true" />
+                    </ui:Button>
+                    <ui:Button text="Player&#10;" display-tooltip-when-elided="true" name="player" class="iconed-button" style="width: 100%; height: 20%;">
+                        <ui:Label text="💻 &#10;" display-tooltip-when-elided="true" />
+                    </ui:Button>
+                    <ui:Button text="Audio&#10;" display-tooltip-when-elided="true" name="audio" class="iconed-button" style="width: 100%; height: 20%;">
+                        <ui:Label text="🔈 " display-tooltip-when-elided="true" style="left: -70px;" />
+                    </ui:Button>
+                    <ui:Button text=" Controls&#10;" display-tooltip-when-elided="true" name="controls" class="iconed-button" style="width: 100%; height: 20%;">
+                        <ui:Label text="🎮 " display-tooltip-when-elided="true" class="icon" />
+                    </ui:Button>
                     <ui:Button text="Back&#10;" display-tooltip-when-elided="true" name="back-to-main-menu-button" style="width: 100%; height: 20%;" />
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="main-menu" style="align-items: center; justify-content: center; bottom: auto; position: absolute; top: auto; height: 100%; width: 100%;">
-            <ui:VisualElement class="MenuContainer">
-                <ui:Button text="Start Game" display-tooltip-when-elided="true" focusable="true" name="start-game-button" class="undecorated" />
-                <ui:Button text="Select Ship" display-tooltip-when-elided="true" tabindex="1" focusable="true" name="ship-selection-button" class="mainMenuButton undecorated" />
-                <ui:Button text="Settings" display-tooltip-when-elided="true" tabindex="1" focusable="true" name="settings-button" class="mainMenuButton undecorated" />
-                <ui:Button text="Quit Game" display-tooltip-when-elided="true" tabindex="2" focusable="true" name="quit-button" class="mainMenuButton undecorated" />
+            <ui:Label text="Galaxy Under Attack" display-tooltip-when-elided="true" class="main-title" />
+            <ui:VisualElement class="MenuContainer" style="position: absolute; width: 250px; left: 5%; top: 20%;">
+                <ui:Button text="Play&#10;" display-tooltip-when-elided="true" tabindex="1" focusable="true" name="ship-selection-button" class="highlightButton" />
+            </ui:VisualElement>
+            <ui:VisualElement style="position: absolute; bottom: 0; height: 10%; width: 100%; flex-direction: row; justify-content: space-between; align-items: center; background-color: rgba(12, 12, 12, 0.38);">
+                <ui:Button text="Settings" display-tooltip-when-elided="true" tabindex="1" focusable="true" name="settings-button" />
+                <ui:Button text="Quit Game" display-tooltip-when-elided="true" tabindex="2" focusable="true" name="quit-button" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="hud" style="width: 100%; height: 100%;">
             <ui:VisualElement style="justify-content: center; align-items: center; height: 100%; width: 100%;">
-                <ui:VisualElement style="position: absolute; width: 20px; height: 2px; background-color: rgba(255, 255, 255, 255);" />
+                <ui:VisualElement style="position: absolute; width: 20px; height: 2px; background-color: rgb(255, 255, 255);" />
                 <ui:VisualElement style="position: absolute; width: 2px; height: 20px; background-color: rgb(255, 255, 255);" />
             </ui:VisualElement>
         </ui:VisualElement>
