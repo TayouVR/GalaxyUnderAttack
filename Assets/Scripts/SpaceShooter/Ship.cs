@@ -65,7 +65,7 @@ namespace SpaceShooter {
 			}
 		}
 		
-		protected void Destruct() {
+		protected new void Destruct() {
 			IShipOwner shipOwner = transform.parent.GetComponent<IShipOwner>();
 			
 			if (shipOwner is null) {

@@ -11,11 +11,14 @@ namespace SpaceShooter {
 		public List<GameObject> playerShips = new List<GameObject>();
 		public List<GameObject> enemyShips = new List<GameObject>();
 		public List<GameObject> weapons = new List<GameObject>();
+		public List<GameObject> asteroids = new List<GameObject>();
+		public List<string> asteroidIDs = new List<string>();
 
 		private int currentShipIndex;
 		private GameObject[] displayedShips = new GameObject[5];
 		
 		public bool enableNebulas = true;
+		public bool enableAsteroids = true;
 		
 		public Transform player;
 		
@@ -37,6 +40,7 @@ namespace SpaceShooter {
 		[Header("Global things")]
 		public GameObject nebula;
 		public int nebulaCount = 100;
+		public int asteroidCount = 1000;
 		public Material enemyEngineMat;
 		public Material playerEngineMat;
 		public Material neutralEngineMat;
@@ -59,6 +63,10 @@ namespace SpaceShooter {
 			SetupMenus();
 			
 			DontDestroyOnLoad(gameObject);
+
+			foreach (var asteroid in asteroids) {
+				asteroidIDs.Add(asteroid.GetComponent<Asteroid>().id);
+			}
 			
 			currentChunk = Vector3.zero;
 			GetOrCreateCurrentChunks();
@@ -263,17 +271,16 @@ namespace SpaceShooter {
 				new Vector3(currentChunk.x - 1, currentChunk.y - 1, currentChunk.z + 1)
 			};
 			foreach (var position in positions) {
-				using (chunk = GetChunkFromVector3(position)) {
-					if ((object)chunk == null) {
-						var go = new GameObject("Chunk X:" + position.x + " Y:" + position.y + " Z:" + position.z);
-						go.transform.SetParent(transform);
-						chunk = go.AddComponent<Chunk>();
-						chunk.Init(currentChunk);
-						chunks.Add(chunk);
-						loadedChunks.Add(chunk);
-					}
-					chunk.Load();
+				chunk = GetChunkFromVector3(position);
+				if ((object)chunk == null) {
+					var go = new GameObject("Chunk X:" + position.x + " Y:" + position.y + " Z:" + position.z);
+					go.transform.SetParent(transform);
+					chunk = go.AddComponent<Chunk>();
+					chunk.Init(currentChunk);
+					chunks.Add(chunk);
+					loadedChunks.Add(chunk);
 				}
+				chunk.Load();
 			}
 		}
 
