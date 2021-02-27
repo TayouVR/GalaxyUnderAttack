@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4625227608645922360}
   - component: {fileID: 456025294533065924}
   - component: {fileID: 1850033827792536661}
+  - component: {fileID: 607915002}
   m_Layer: 0
   m_Name: Asteroid004
   m_TagString: Untagged
@@ -49,6 +50,7 @@ MonoBehaviour:
   health: 50
   shield: 0
   armor: 0
+  id: 3e5250e4-3160-475a-b8e8-cba42677007c
 --- !u!54 &1850033827792536661
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -65,6 +67,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!135 &607915002
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 888336001928815587}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 4
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &5675169809842060068
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -78,15 +93,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3f79cdd6c07a4c34c9b1690c70a7095a, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3f79cdd6c07a4c34c9b1690c70a7095a, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3f79cdd6c07a4c34c9b1690c70a7095a, type: 3}
       propertyPath: m_LocalScale.z
-      value: 3
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3f79cdd6c07a4c34c9b1690c70a7095a, type: 3}
       propertyPath: m_LocalPosition.x
