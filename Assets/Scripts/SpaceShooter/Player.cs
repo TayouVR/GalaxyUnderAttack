@@ -24,8 +24,8 @@ namespace SpaceShooter {
 			_inputActions = new InputActions();
 		
 			//movement
-			_inputActions.ShipControls.MoveLeftRight.performed += context => _movement.x = context.ReadValue<float>();
-			_inputActions.ShipControls.MoveUpDown.performed += context => _movement.y = context.ReadValue<float>();
+			_inputActions.ShipControls.MoveLeftRight.performed += context => _movement.x = context.ReadValue<float>()/4;
+			_inputActions.ShipControls.MoveUpDown.performed += context => _movement.y = context.ReadValue<float>()/4;
 			_inputActions.ShipControls.MoveForwardBack.performed += context => _movement.z = -context.ReadValue<float>();
 		
 			//rotation

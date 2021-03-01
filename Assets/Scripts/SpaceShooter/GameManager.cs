@@ -156,6 +156,11 @@ namespace SpaceShooter {
 			shipSelectionMenu.visible = shipSelectionMenu == menu;
 			settingsMenu.visible = settingsMenu == menu;
 			hud.visible = hud == menu;
+
+			if (shipSelectionMenu != menu) {
+				shipPageLeftButton.visible = shipPageLeftButton.parent.visible;
+				shipPageRightButton.visible = shipPageRightButton.parent.visible;
+			}
 		}
 
 		private void StartGame() {
@@ -276,7 +281,7 @@ namespace SpaceShooter {
 					var go = new GameObject("Chunk X:" + position.x + " Y:" + position.y + " Z:" + position.z);
 					go.transform.SetParent(transform);
 					chunk = go.AddComponent<Chunk>();
-					chunk.Init(currentChunk);
+					chunk.Init(position);
 					chunks.Add(chunk);
 					loadedChunks.Add(chunk);
 				}

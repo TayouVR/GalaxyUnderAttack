@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 7070550327920332052}
   - component: {fileID: 7313301017707115891}
   - component: {fileID: 4564632778565071771}
-  m_Layer: 0
+  - component: {fileID: 3743993343946516700}
+  m_Layer: 3
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,6 +104,20 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5523277661179574252, guid: 6fb449cd97ce84643b1f742b93c874ae, type: 3}
+--- !u!64 &3743993343946516700
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1326167001208489618}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5523277661179574252, guid: 6fb449cd97ce84643b1f742b93c874ae, type: 3}
 --- !u!1 &2148066773654327558
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,7 +128,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6701835377874415531}
   - component: {fileID: 2419044054344850597}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +190,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 1
+  m_Time: 0.3
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.29671362
@@ -250,7 +265,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5738580717694219220}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -281,7 +296,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2745105314629270336}
   - component: {fileID: 2419044054344850593}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spacestrider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,7 +310,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3266026799166120442}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
@@ -321,12 +336,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bac5431086434d64d8e25a89bee3e702, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  droptable: {fileID: 0}
+  health: 0
+  shield: 0
+  armor: 0
   fraction: 0
   mesh: {fileID: 7313301017707115891}
   engineMatIndex: 2
   weapons:
   - {fileID: 6139983272365692450}
   - {fileID: 8868926668915747869}
+  weaponComponents: []
   turretMounts:
   - {fileID: 5738580717694219220}
   - {fileID: 292433316097045311}
@@ -342,7 +362,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8868926668915747869}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Weapon2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -372,7 +392,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 292433316097045311}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Turret2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -403,7 +423,7 @@ GameObject:
   m_Component:
   - component: {fileID: 943107529408336029}
   - component: {fileID: 2419044054344850594}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Trail2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -465,7 +485,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 1
+  m_Time: 0.3
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.29671362
@@ -540,7 +560,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6139983272365692450}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}

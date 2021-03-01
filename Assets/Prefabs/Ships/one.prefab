@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5439375068173125641}
   - component: {fileID: 6682531987175663661}
   - component: {fileID: 983091387939854255}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: one
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5799640978633320924}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -102,6 +102,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bac5431086434d64d8e25a89bee3e702, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  droptable: {fileID: 0}
+  health: 0
+  shield: 0
+  armor: 0
   fraction: 0
   mesh: {fileID: 5439375068173125641}
   engineMatIndex: 2
@@ -110,6 +114,7 @@ MonoBehaviour:
   - {fileID: 6682531986453136337}
   - {fileID: 6682531987266300959}
   - {fileID: 6682531986399265660}
+  weaponComponents: []
   turretMounts: []
   engineTrails:
   - {fileID: 6682531986900699885}
@@ -136,7 +141,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6682531986247572762}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Weapon1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,7 +171,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6682531986399265660}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Weapon4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -196,7 +201,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6682531986453136337}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Weapon2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -227,7 +232,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6682531986900699882}
   - component: {fileID: 6682531986900699885}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Engine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -289,7 +294,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 1
+  m_Time: 0.3
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.29671362
@@ -364,7 +369,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6682531987266300959}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Weapon3
   m_TagString: Untagged
   m_Icon: {fileID: 0}

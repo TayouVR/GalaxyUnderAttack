@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5040962627947624231}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Weapon2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1666123470757432568}
   - component: {fileID: 2266422071323953029}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Engine1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 1
+  m_Time: 0.3
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.29671362
@@ -178,7 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1799552680283332730}
   - component: {fileID: 2266422071323953054}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Darkzov
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -219,6 +219,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bac5431086434d64d8e25a89bee3e702, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  droptable: {fileID: 0}
+  health: 0
+  shield: 0
+  armor: 0
   fraction: 0
   mesh: {fileID: 6602217245039865417}
   engineMatIndex: 1
@@ -227,6 +231,7 @@ MonoBehaviour:
   - {fileID: 5040962627947624231}
   - {fileID: 1502521231624260841}
   - {fileID: 7805814116397463959}
+  weaponComponents: []
   turretMounts:
   - {fileID: 3046781202087912432}
   engineTrails:
@@ -242,7 +247,7 @@ GameObject:
   m_Component:
   - component: {fileID: 236638939146545406}
   - component: {fileID: 2266422071149670011}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Engine2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -304,7 +309,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 1
+  m_Time: 0.3
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.29934406
@@ -382,7 +387,7 @@ GameObject:
   - component: {fileID: 6700930813134296622}
   - component: {fileID: 6602217245039865417}
   - component: {fileID: 2266422071323953051}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -477,7 +482,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8317989184410920643}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Weapon1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -507,7 +512,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3046781202087912432}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TurretMount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -538,7 +543,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7805814116397463959}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Weapon4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -568,7 +573,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1502521231624260841}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Weapon3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -652,9 +657,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5013969399347631898, guid: b14f89a42b337474c8d85f55f49042ab, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -4249270160466049204, guid: b14f89a42b337474c8d85f55f49042ab, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b14f89a42b337474c8d85f55f49042ab, type: 3}
       propertyPath: m_Name
       value: turretThing
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b14f89a42b337474c8d85f55f49042ab, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3179536064482118285, guid: b14f89a42b337474c8d85f55f49042ab, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773560820704459582, guid: b14f89a42b337474c8d85f55f49042ab, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b14f89a42b337474c8d85f55f49042ab, type: 3}

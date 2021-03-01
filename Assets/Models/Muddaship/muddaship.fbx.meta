@@ -3,7 +3,32 @@ guid: 7da42f9ff867cc64683c912e9dce5dbb
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: body color
+    second: {fileID: 2100000, guid: 6bdc2375f72eb7442b04f59db3c86f7a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bombay door
+    second: {fileID: 2100000, guid: da8a11a37c19a804ebee6506ca581fb9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: secondary color
+    second: {fileID: 2100000, guid: 4e82008eb0d752d4d865ea2e7a06de37, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: thruster color
+    second: {fileID: 2100000, guid: 511e1ce37935a9d4e8a660fd6479808f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: window
+    second: {fileID: 2100000, guid: fe10cb97e12112348b37f3dac67d9e82, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

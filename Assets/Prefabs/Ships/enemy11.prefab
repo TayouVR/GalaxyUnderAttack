@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 554911022133299876}
   - component: {fileID: 1185261456710370016}
   - component: {fileID: 1185261456710370019}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: enemy11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,10 +112,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bac5431086434d64d8e25a89bee3e702, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  droptable: {fileID: 0}
+  health: 0
+  shield: 0
+  armor: 0
   fraction: 1
   mesh: {fileID: 554911022133299876}
   engineMatIndex: 1
   weapons: []
+  weaponComponents: []
   turretMounts: []
   engineTrails:
   - {fileID: 1185261456902078599}
@@ -129,7 +134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4235393725534236788}
   - component: {fileID: 1185261456902078599}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: thrusters
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +196,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 1
+  m_Time: 0.3
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.29671362
