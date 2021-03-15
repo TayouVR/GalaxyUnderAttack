@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -26,6 +27,9 @@ namespace SpaceShooter {
 		public int chunkSize = 1000;
 		public Vector3 currentChunk;
 
+		public int enemySpawnSecondDelayUntilNextSpawn = 10;
+		public int enemySpawnRange = 2000;
+
 		// menus
 		[Header("UI")]
 		[SerializeField] private UIDocument menus;
@@ -47,6 +51,8 @@ namespace SpaceShooter {
 		public Gradient enemyTrailGradient;
 		public Gradient playerTrailGradient;
 		public Gradient neutralTrailGradient;
+
+		public State state;
 		
 		public static GameManager Instance;
 		
@@ -180,6 +186,10 @@ namespace SpaceShooter {
 			}
 
 			//playerComp.SetWeapon(1, weapons[0]);
+
+			state = State.Game;
+			
+			Coroutine crtn = StartCoroutine(SpawnEnemy());
 		}
 
 		private void Quit() {
@@ -188,7 +198,14 @@ namespace SpaceShooter {
 #endif
 			Application.Quit();
 		}
-		
+
+		public IEnumerator SpawnEnemy() {
+			while (state == State.Game) {
+				
+				yield return new WaitForSeconds(enemySpawnSecondDelayUntilNextSpawn);
+			}
+		}
+
 		// Update is called once per frame
 		void Update() {
 
@@ -321,5 +338,13 @@ namespace SpaceShooter {
 			
 			return abc/6f;
 		}
+	}
+
+	public enum State {
+		MainMenu,
+		Game,
+		SettingsGraphics,
+		SettingsAudio,
+		SettingsInput
 	}
 }

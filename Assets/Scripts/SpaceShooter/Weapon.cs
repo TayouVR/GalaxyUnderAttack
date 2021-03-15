@@ -1,25 +1,13 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace SpaceShooter {
-    public class Weapon : MonoBehaviour {
+	public abstract class Weapon : MonoBehaviour {
         
-        public new string name;
-        public int damage;
-        [SerializeField] protected GameObject projectile;
-        
-        // Start is called before the first frame update
-        void Start() {
-        
-        }
+		public new string name;
+		public int damage;
+		[SerializeField] protected GameObject projectile;
 
-        // Update is called once per frame
-        void Update() {
-        
-        }
+		public abstract void Shoot();
 
-        public void Shoot() {
-            GameObject flyingProjectile = Instantiate(projectile, transform.position, transform.rotation);
-            flyingProjectile.GetComponent<Rigidbody>().AddForce(transform.forward * 20);
-        }
-    }
+	}
 }

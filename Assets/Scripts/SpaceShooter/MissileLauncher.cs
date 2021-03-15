@@ -5,11 +5,11 @@ namespace SpaceShooter {
 
 		public float range = 1000;
 		
-		public new void Shoot() {
+		public override void Shoot() {
 			GameObject flyingProjectile = Instantiate(projectile, transform.position, transform.rotation);
 			var missile = flyingProjectile.GetComponent<GuidedMissile>();
 			missile.target = GetClosestTarget();
-			flyingProjectile.GetComponent<Rigidbody>().AddForce(transform.forward * 20);
+			missile.missileReady = true;
 		}
 
 		public GameObject GetClosestTarget() {

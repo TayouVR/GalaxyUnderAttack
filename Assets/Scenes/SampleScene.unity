@@ -160,8 +160,8 @@ MonoBehaviour:
   enemyShips:
   - {fileID: 2068151488581725041, guid: e892241f1ae195341b3c68b9580880ce, type: 3}
   weapons:
-  - {fileID: 7584389057703036946, guid: 76f94d8b8e448a149aa732ffb5d6be08, type: 3}
   - {fileID: 7258673011144756002, guid: 83c2e0c05d35114438879873e7afabad, type: 3}
+  - {fileID: 7584389057703036946, guid: 76f94d8b8e448a149aa732ffb5d6be08, type: 3}
   asteroids:
   - {fileID: 4921709593719303862, guid: 8fc30e02b45df6d4d9736ebddafb2eb3, type: 3}
   - {fileID: 1734653475480791765, guid: 086db1d851342f6409d56af738bb99fa, type: 3}
@@ -206,6 +206,8 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   chunkSize: 5000
   currentChunk: {x: 0, y: 0, z: 0}
+  enemySpawnSecondDelayUntilNextSpawn: 10
+  enemySpawnRange: 2000
   menus: {fileID: 1930613568}
   nebula: {fileID: 2248676569470681584, guid: 752ed07fb06d3cb4eb91f6a062a76c0e, type: 3}
   nebulaCount: 20
@@ -300,6 +302,7 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
+  state: 0
   cameraFollow: {fileID: 0}
 --- !u!4 &162456279
 Transform:
@@ -2231,7 +2234,7 @@ GameObject:
   - component: {fileID: 1979623259}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
