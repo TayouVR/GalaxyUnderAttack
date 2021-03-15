@@ -5,7 +5,7 @@ namespace SpaceShooter {
         
         public new string name;
         public int damage;
-        [SerializeField] private GameObject projectile;
+        [SerializeField] protected GameObject projectile;
         
         // Start is called before the first frame update
         void Start() {
