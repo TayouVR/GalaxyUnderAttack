@@ -47,7 +47,7 @@ MonoBehaviour:
   name: Missile Launcher
   damage: 10
   projectile: {fileID: 3595962358892633046, guid: fa0aa020d982dc8429f5456269071edb, type: 3}
-  range: 1000
+  range: 500
 --- !u!1 &7258673011616428677
 GameObject:
   m_ObjectHideFlags: 0

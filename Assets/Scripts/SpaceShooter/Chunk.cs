@@ -50,17 +50,21 @@ namespace SpaceShooter {
 
 		public void Load() {
 			if (!isLoaded) {
-				foreach (var nebula in nebulas) {
-					GameObject nebula2 = Instantiate(GameManager.Instance.nebula, GameManager.Instance.chunkSize * position + nebula.position, new Quaternion(), transform);
-					ParticleSystem.MainModule mainModule = nebula2.GetComponent<ParticleSystem>().main;
-					mainModule.startColor = GameManager.Instance.nebulaColors.Evaluate(nebula.color);
+				if (GameManager.Instance.enableNebulas) {
+					foreach (var nebula in nebulas) {
+						GameObject nebula2 = Instantiate(GameManager.Instance.nebula, GameManager.Instance.chunkSize * position + nebula.position, new Quaternion(), transform);
+						ParticleSystem.MainModule mainModule = nebula2.GetComponent<ParticleSystem>().main;
+						mainModule.startColor = GameManager.Instance.nebulaColors.Evaluate(nebula.color);
+					}
 				}
-				foreach (var asteroid in asteroids) {
-					GameObject asteroid2 = Instantiate(GameManager.Instance.asteroids[Random.Range(0, GameManager.Instance.asteroids.Count)], GameManager.Instance.chunkSize * position + asteroid.position, new Quaternion(), transform);
-					asteroid2.transform.position = asteroid.position;
-					asteroid2.transform.rotation = asteroid.rotation;
-					asteroid.gameObject = asteroid2;
-					asteroid.guid = asteroid2.GetComponent<Asteroid>().id;
+				if (GameManager.Instance.enableAsteroids) {
+					foreach (var asteroid in asteroids) {
+						GameObject asteroid2 = Instantiate(GameManager.Instance.asteroids[Random.Range(0, GameManager.Instance.asteroids.Count)], GameManager.Instance.chunkSize * position + asteroid.position, new Quaternion(), transform);
+						asteroid2.transform.position = asteroid.position;
+						asteroid2.transform.rotation = asteroid.rotation;
+						asteroid.gameObject = asteroid2;
+						asteroid.guid = asteroid2.GetComponent<Asteroid>().id;
+					}
 				}
 				isLoaded = true;
 			}

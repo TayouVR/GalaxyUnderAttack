@@ -65,8 +65,10 @@ namespace SpaceShooter {
 			}
 		}
 		
-		protected new void Destruct() {
+		protected override void Destruct() {
 			IShipOwner shipOwner = transform.parent.GetComponent<IShipOwner>();
+
+			//Debug.Log(shipOwner != null);
 			
 			if (shipOwner is null) {
 				base.Destruct();
@@ -74,8 +76,15 @@ namespace SpaceShooter {
 				shipOwner.Die();
 			}
 		}
-		
-		
+
+		private void OnCollisionEnter(Collision other) {
+			DamageCaster dmg = other.gameObject.GetComponent<DamageCaster>();
+			if (dmg != null) {
+				TakeDamage(dmg.kineticDamage, dmg.electricDamage);
+			}
+		}
+
+
 		public enum Fraction {
 			PLAYER,
 			ENEMY,

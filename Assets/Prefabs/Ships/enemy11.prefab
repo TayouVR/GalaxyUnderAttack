@@ -112,10 +112,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bac5431086434d64d8e25a89bee3e702, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  droptable: {fileID: 0}
-  health: 0
-  shield: 0
-  armor: 0
+  droptable: {fileID: 11400000, guid: ac41cea6bd0eeb642abd919c5b034a73, type: 2}
+  health: 100
+  shield: 50
+  armor: 25
   fraction: 1
   mesh: {fileID: 554911022133299876}
   engineMatIndex: 1

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2163061514273470447}
   - component: {fileID: 3143228554459706681}
+  - component: {fileID: 7690217378645901016}
   m_Layer: 0
   m_Name: Guided Missile
   m_TagString: Untagged
@@ -44,15 +45,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 072739da4c52b424d8f5acf62ea32a52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  kineticDamage: 20
+  electricDamage: 5
   target: {fileID: 0}
-  speed: 0.5
+  speed: 2
   turnSpeed: 3
   lifetime: 10
   explosionEffectPrefab: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
   explodeOnLifeExpire: 1
-  damage: 10
   tolorateDist: 10
+  explosionRadius: 25
   missileReady: 0
+--- !u!136 &7690217378645901016
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3595962358892633046}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.1
+  m_Height: 1
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5131786993642650578
 GameObject:
   m_ObjectHideFlags: 0
@@ -64,7 +81,6 @@ GameObject:
   - component: {fileID: 1127332849807289649}
   - component: {fileID: 8143095595994998549}
   - component: {fileID: 6083370383594654584}
-  - component: {fileID: 2205447340387984034}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -135,17 +151,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &2205447340387984034
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5131786993642650578}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}

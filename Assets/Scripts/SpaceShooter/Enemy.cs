@@ -6,6 +6,9 @@ namespace SpaceShooter {
 	[RequireComponent(typeof(Rigidbody))]
 	public class Enemy : MonoBehaviour, IShipOwner {
 
+		public new string name;
+		public Ship shipReference;
+
 		private bool isTargetInSight;
 		private Transform player;
 

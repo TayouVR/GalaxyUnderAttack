@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using SpaceShooter;
 using UnityEngine;
 
-public class GuidedMissile : MonoBehaviour {
+public class GuidedMissile : DamageCaster {
     // Start is called before the first frame update
 
     public GameObject target;
@@ -11,9 +13,9 @@ public class GuidedMissile : MonoBehaviour {
     public float lifetime = 10;
     public GameObject explosionEffectPrefab;
     public bool explodeOnLifeExpire = false;
-    public float damage = 10;
     public float tolorateDist = 10;
-    private float distance = -1;
+    private float distance = 10000;
+    public float explosionRadius = 25;
 
     public bool missileReady = false;
 
@@ -30,13 +32,11 @@ public class GuidedMissile : MonoBehaviour {
             if (target != null) {
                 distance = Vector3.Distance(transform.position, target.transform.position);
                 transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(target.transform.position - transform.position), turnSpeed * Time.deltaTime);
-            } else {
-                distance = -1;
             }
         
             transform.position += transform.forward * speed;
         
-            if ((lifetime <= 0 && explodeOnLifeExpire) || distance < tolorateDist) {
+            if (lifetime <= 0 && explodeOnLifeExpire || distance < tolorateDist) {
                 explode();
             }
             if (lifetime <=  0) {
@@ -44,7 +44,11 @@ public class GuidedMissile : MonoBehaviour {
             }
         }
     }
-    
+
+    private void OnCollisionEnter(Collision other) {
+        explode();
+    }
+
     public void killBullet() {
         Destroy(this.gameObject);
         Destroy(this);
@@ -52,11 +56,21 @@ public class GuidedMissile : MonoBehaviour {
     
     public void explode() {
 
-        // no Idea how u wanna implement the damage dealing thing but I know it should be here and u should use the "damage" variable.
+        Collider[] hits = Physics.OverlapSphere(transform.position, explosionRadius);
+        foreach (var hit in hits) {
+            GameObject hitObj = hit.gameObject;
+            float DistanceDamageMultiplier = Vector3.Distance(transform.position, hitObj.transform.position) / 10;
+            Destructible dst = hitObj.GetComponent<Destructible>();
+            if (dst != null) {
+                //Debug.Log("DAMAGE! " + kineticDamage * DistanceDamageMultiplier + " " + electricDamage * DistanceDamageMultiplier);
+                dst.TakeDamage(kineticDamage * DistanceDamageMultiplier, electricDamage * DistanceDamageMultiplier);
+            }
+        }
         if (explosionEffectPrefab != null) {
             Instantiate(explosionEffectPrefab, transform.position, transform.rotation);
             //explosionEffect.Play();
         }
+        
         killBullet();
 
     }

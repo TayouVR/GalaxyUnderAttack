@@ -3,28 +3,27 @@ using UnityEngine;
 namespace SpaceShooter {
     public abstract class Destructible : MonoBehaviour {
         public Droptable droptable;
-        public int health;
-        public int shield;
-        public int armor;
+        public float health;
+        public float shield;
+        public float armor;
 
-        public void GetDamage(int kineticDamage, int electricDamage) {
-            int shieldTemp = shield;
-            int armorTemp = armor;
-            int healthTemp = health;
+        public void TakeDamage(float kineticDamage, float electricDamage) {
+            float shieldTemp = shield;
+            float armorTemp = armor;
+            float healthTemp = health;
             if (electricDamage - shield >= 0) {
                 shieldTemp = 0;
                 electricDamage -= shield;
-            } else {
-                shieldTemp = shield - electricDamage;
-                if (shieldTemp - kineticDamage/2 <= 0) {
-                    armorTemp += shieldTemp*2;
-                    shieldTemp = 0;
-                    if (armorTemp <= 0) {
-                        healthTemp += armorTemp;
-                        armorTemp = 0;
-                        if (healthTemp <= 0) {
-                            healthTemp = 0;
-                        }
+            }
+            shieldTemp = shield - electricDamage;
+            if (shieldTemp - kineticDamage/2 <= 0) {
+                armorTemp += shieldTemp*2;
+                shieldTemp = 0;
+                if (armorTemp <= 0) {
+                    healthTemp += armorTemp;
+                    armorTemp = 0;
+                    if (healthTemp <= 0) {
+                        healthTemp = 0;
                     }
                 }
             }
@@ -33,13 +32,13 @@ namespace SpaceShooter {
             armor = armorTemp;
             health = healthTemp;
 
-            if (armor == 0) {
+            if (health == 0) {
                 Destruct();
             }
 
         }
 
-        protected void Destruct() {
+        protected virtual void Destruct() {
             Destroy(gameObject);
         }
     }

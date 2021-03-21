@@ -220,9 +220,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   droptable: {fileID: 0}
-  health: 0
-  shield: 0
-  armor: 0
+  health: 100
+  shield: 100
+  armor: 100
   fraction: 0
   mesh: {fileID: 6602217245039865417}
   engineMatIndex: 1
@@ -435,7 +435,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f3fe03207abbeeb44997dc8228039fea, type: 2}
+  - {fileID: 2100000, guid: 8c50eadcf7e2b3f4382443a12a55d02e, type: 2}
   - {fileID: 2100000, guid: f333f3bacafa37a4e849c5439d13fbb8, type: 2}
   - {fileID: 2100000, guid: d1f9559e530f8834fb5aae37124a7d5f, type: 2}
   m_StaticBatchInfo:

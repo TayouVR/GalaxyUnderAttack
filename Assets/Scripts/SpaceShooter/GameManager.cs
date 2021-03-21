@@ -5,12 +5,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 using Cursor = UnityEngine.Cursor;
+using Random = UnityEngine.Random;
 
 namespace SpaceShooter {
 	public class GameManager : MonoBehaviour {
 		
 		public List<GameObject> playerShips = new List<GameObject>();
-		public List<GameObject> enemyShips = new List<GameObject>();
+		public List<GameObject> enemies = new List<GameObject>();
 		public List<GameObject> weapons = new List<GameObject>();
 		public List<GameObject> asteroids = new List<GameObject>();
 		public List<string> asteroidIDs = new List<string>();
@@ -201,7 +202,10 @@ namespace SpaceShooter {
 
 		public IEnumerator SpawnEnemy() {
 			while (state == State.Game) {
-				
+				Vector3 spawnpos = new Vector3(Random.Range(player.position.x - enemySpawnRange, player.position.x + enemySpawnRange),
+					Random.Range(player.position.y - enemySpawnRange, player.position.y + enemySpawnRange),
+					Random.Range(player.position.z - enemySpawnRange, player.position.z + enemySpawnRange));
+				Instantiate(enemies[(int) Mathf.Floor(Random.Range(0, enemies.Count))], spawnpos, new Quaternion());
 				yield return new WaitForSeconds(enemySpawnSecondDelayUntilNextSpawn);
 			}
 		}

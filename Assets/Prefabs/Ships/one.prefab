@@ -103,9 +103,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   droptable: {fileID: 0}
-  health: 0
-  shield: 0
-  armor: 0
+  health: 100
+  shield: 100
+  armor: 100
   fraction: 0
   mesh: {fileID: 5439375068173125641}
   engineMatIndex: 2
