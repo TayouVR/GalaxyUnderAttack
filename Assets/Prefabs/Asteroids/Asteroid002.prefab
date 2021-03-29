@@ -100,6 +100,8 @@ MonoBehaviour:
   health: 50
   shield: 0
   armor: 0
+  scoreValue: 10
+  soundEffect: {fileID: 479495017258472367, guid: b862d76ac5507694096923108a15e02b, type: 3}
   dieParticleSystem: {fileID: 1121192042590650, guid: b04a66b6faba4774c8e5ffff8b719a98, type: 3}
   id: abb15ade-6719-4ba3-a66f-dd06805ff18f
 --- !u!54 &3149245253212437674

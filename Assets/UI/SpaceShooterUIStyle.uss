@@ -1,6 +1,11 @@
 :root {
 }
 
+.unity-label {
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+}
+
 .unity-button {
     color: rgb(255, 255, 255);
     -unity-slice-left: 16;
@@ -145,7 +150,7 @@
     -unity-text-align: middle-right;
     justify-content: center;
     height: 100%;
-    color: rgba(255, 255, 255, 255);
+    color: rgb(255, 255, 255);
     width: 100px;
 }
 
@@ -160,4 +165,86 @@
     color: rgb(255, 255, 255);
     width: 100px;
     -unity-font-style: normal;
+}
+
+.stat-bars {
+}
+
+.unity-min-max-slider__label {
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+}
+
+.unity-min-max-slider__input {
+    overflow: visible;
+    min-height: 16px;
+}
+
+.unity-min-max-slider__tracker {
+    top: 3px;
+    margin: 2px 1px 2px 0;
+    height: 9px;
+    background-color: rgb(94, 94, 94);
+}
+
+.unity-min-max-slider__dragger {
+    -unity-slice-left: 7;
+    -unity-slice-top: 0;
+    -unity-slice-right: 7;
+    -unity-slice-bottom: 0;
+    margin-top: 4px;
+    margin-left: -2px;
+    margin-right: -2px;
+    width: 12px;
+    height: 10px;
+    position: absolute;
+    background-image: none;
+    background-color: rgb(255, 255, 255);
+}
+
+.unity-min-max-slider__min-thumb {
+    cursor: resize-horizontal;
+    position: absolute;
+    background-image: none;
+}
+
+.unity-min-max-slider__max-thumb {
+    cursor: resize-horizontal;
+    position: absolute;
+}
+
+.stat-bars .unity-min-max-slider__input {
+    overflow: visible;
+    min-height: 16px;
+}
+
+.stat-bars .unity-min-max-slider__tracker {
+    top: 6px;
+    margin: 2px 1px 2px 0;
+    height: 2px;
+    background-color: rgb(94, 94, 94);
+}
+
+.stat-bars .unity-min-max-slider__dragger {
+    -unity-slice-left: 7;
+    -unity-slice-top: 0;
+    -unity-slice-right: 7;
+    -unity-slice-bottom: 0;
+    margin-top: 4px;
+    margin-left: -2px;
+    margin-right: -2px;
+    width: 12px;
+    height: 10px;
+    position: absolute;
+    background-image: resource('Builtin Skins/DarkSkin/Images/minmax slider thumb.png');
+}
+
+.stat-bars .unity-min-max-slider__min-thumb {
+    cursor: resize-horizontal;
+    position: absolute;
+}
+
+.stat-bars .unity-min-max-slider__max-thumb {
+    cursor: resize-horizontal;
+    position: absolute;
 }

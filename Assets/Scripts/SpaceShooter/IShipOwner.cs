@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SpaceShooter {
+﻿namespace SpaceShooter {
 	public interface IShipOwner {
 		public void Die();
 	}

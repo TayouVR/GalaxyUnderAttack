@@ -79,6 +79,7 @@ MonoBehaviour:
   kineticDamage: 0
   electricDamage: 1
   lifetime: 10
+  soundEffect: {fileID: 988969629242059237, guid: 798fb9813079dcd4e8a2a6b444ebf3b5, type: 3}
 --- !u!1 &8719237333198239597
 GameObject:
   m_ObjectHideFlags: 0

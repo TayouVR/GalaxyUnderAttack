@@ -26,10 +26,18 @@ namespace SpaceShooter {
 			SetFractionAspects();
 		}
 
-		public void Shoot() {
-			foreach (var weapon in weaponComponents) {
-				if (weapon != null) {
-					weapon.Shoot();
+		public void ShootPrimary() {
+			for (var i = 0; i < weaponComponents.Length/2; i++) {
+				if (weaponComponents[i] != null) {
+					weaponComponents[i].Shoot();
+				}
+			}
+		}
+
+		public void ShootSecondary() {
+			for (var i = weaponComponents.Length/2; i < weaponComponents.Length; i++) {
+				if (weaponComponents[i] != null) {
+					weaponComponents[i].Shoot();
 				}
 			}
 		}

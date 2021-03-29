@@ -45,14 +45,14 @@ namespace SpaceShooter {
 
 		public void PrimaryShoot(InputAction.CallbackContext context) {
 			if ((object)spawnedShipShip != null) {
-				spawnedShipShip.Shoot();
+				spawnedShipShip.ShootPrimary();
 			}
 		}
 		
 		IEnumerator Fire() {
 			while (_inputActions.ShipControls.PrimaryFire.ReadValue<float>() >= 0.5f) {
 				if ((object)spawnedShipShip != null) {
-					spawnedShipShip.Shoot();
+					spawnedShipShip.ShootPrimary();
 				}
 				yield return new WaitForSeconds(0.5f);
 			}
@@ -60,7 +60,7 @@ namespace SpaceShooter {
 
 		public void SecondaryShoot(InputAction.CallbackContext context) {
 			if ((object)spawnedShipShip != null) {
-				spawnedShipShip.Shoot();
+				spawnedShipShip.ShootSecondary();
 			}
 		}
 

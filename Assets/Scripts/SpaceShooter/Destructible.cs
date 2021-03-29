@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.InputSystem.Controls;
+using UnityEngine.UIElements;
 
 namespace SpaceShooter {
     public abstract class Destructible : MonoBehaviour {
@@ -6,6 +8,9 @@ namespace SpaceShooter {
         public float health;
         public float shield;
         public float armor;
+        public int scoreValue;
+
+        public GameObject soundEffect;
 
         public void TakeDamage(float kineticDamage, float electricDamage) {
             float shieldTemp = shield;
@@ -33,6 +38,15 @@ namespace SpaceShooter {
             health = healthTemp;
 
             if (health == 0) {
+                string value = ((TextElement) GameManager.Instance.scoreLabel).text;
+                ((TextElement) GameManager.Instance.scoreLabel).text = (int.Parse(value) + scoreValue).ToString(); 
+                if (soundEffect != null) {
+                    var sfx = Instantiate(soundEffect, transform.position, transform.rotation);
+                    var audioSource = sfx.GetComponent<AudioSource>();
+                    audioSource.volume = GameManager.Instance.miscVolume;
+                    audioSource.Play();
+                    sfx.GetComponent<DelayedDestroyer>().StartCountdown();
+                }
                 Destruct();
             }
 

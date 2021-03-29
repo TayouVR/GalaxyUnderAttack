@@ -4,12 +4,16 @@ namespace SpaceShooter {
 	public class MissileLauncher : Weapon {
 
 		public float range = 1000;
+
+		public Transform missileSpawn;
 		
 		public override void Shoot() {
-			GameObject flyingProjectile = Instantiate(projectile, transform.position, transform.rotation);
+			GameObject flyingProjectile = Instantiate(projectile, missileSpawn.position, transform.rotation);
 			var missile = flyingProjectile.GetComponent<GuidedMissile>();
 			missile.target = GetClosestTarget();
 			missile.missileReady = true;
+			
+			base.Shoot();
 		}
 
 		public GameObject GetClosestTarget() {

@@ -340,6 +340,7 @@ MonoBehaviour:
   health: 100
   shield: 100
   armor: 100
+  scoreValue: 75
   fraction: 0
   mesh: {fileID: 7313301017707115891}
   engineMatIndex: 2

@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 using Cursor = UnityEngine.Cursor;
 using Random = UnityEngine.Random;
@@ -10,6 +9,8 @@ using Random = UnityEngine.Random;
 namespace SpaceShooter {
 	public class GameManager : MonoBehaviour {
 		
+		// Indexes
+		[Header("Indexes")]
 		public List<GameObject> playerShips = new List<GameObject>();
 		public List<GameObject> enemies = new List<GameObject>();
 		public List<GameObject> weapons = new List<GameObject>();
@@ -19,8 +20,12 @@ namespace SpaceShooter {
 		private int currentShipIndex;
 		private GameObject[] displayedShips = new GameObject[5];
 		
+		// Misc
+		[Header("misc")]
 		public bool enableNebulas = true;
 		public bool enableAsteroids = true;
+		public AudioSource backgroundMusic;
+		[Range(0, 1)]public float miscVolume = 0.5f;
 		
 		public Transform player;
 		
@@ -61,7 +66,12 @@ namespace SpaceShooter {
 		private List<Chunk> loadedChunks = new List<Chunk>();
 
 		public CameraFollow cameraFollow;
-		
+		private VisualElement _graphicsMenu;
+		private VisualElement _playerMenu;
+		private VisualElement _audioMenu;
+		private VisualElement _controlsMenu;
+		public VisualElement scoreLabel;
+
 		void Start() {
 			Instance = this;
 
@@ -77,6 +87,10 @@ namespace SpaceShooter {
 			
 			currentChunk = Vector3.zero;
 			GetOrCreateCurrentChunks();
+
+			if (backgroundMusic != null) {
+				backgroundMusic.Play();
+			}
 		}
 
 		private void SetupMenus() {
@@ -84,7 +98,10 @@ namespace SpaceShooter {
 			mainMenu = menus.rootVisualElement.Q<VisualElement>("main-menu");
 			//mainMenu.Q<Button>("start-game-button").clickable.clicked += StartGame;
 			mainMenu.Q<Button>("ship-selection-button").clickable.clicked += ToShipSelectionMenu;
-			mainMenu.Q<Button>("settings-button").clickable.clicked += () => SetMenuTo(settingsMenu);
+			mainMenu.Q<Button>("settings-button").clickable.clicked += () => {
+				SetMenuTo(settingsMenu);
+				SetSettingsMenuTo(_graphicsMenu);
+			};
 			mainMenu.Q<Button>("quit-button").clickable.clicked += Quit;
 
 			// ship selection menu
@@ -99,10 +116,43 @@ namespace SpaceShooter {
 
 			// Settings
 			settingsMenu = menus.rootVisualElement.Q<VisualElement>("settings-menu");
+			settingsMenu.Q<Button>("graphics").clickable.clicked += () => SetSettingsMenuTo(_graphicsMenu);
+			settingsMenu.Q<Button>("player").clickable.clicked += () => SetSettingsMenuTo(_playerMenu);
+			settingsMenu.Q<Button>("audio").clickable.clicked += () => SetSettingsMenuTo(_audioMenu);
+			settingsMenu.Q<Button>("controls").clickable.clicked += () => SetSettingsMenuTo(_controlsMenu);
 			settingsMenu.Q<Button>("back-to-main-menu-button").clickable.clicked += () => SetMenuTo(mainMenu);
+
+			_graphicsMenu = settingsMenu.Q<Button>("graphics-settings-page");
+			_playerMenu = settingsMenu.Q<Button>("player-settings-page");
+			_audioMenu = settingsMenu.Q<Button>("audio-settings-page");
+			_controlsMenu = settingsMenu.Q<Button>("controls-settings-page");
+			
+			//SerializedObject backgroundMusicObject = new SerializedObject(backgroundMusic);
+			//SerializedProperty backgroundMusicVolume = backgroundMusicObject.FindProperty("volume");
+			
+			//SerializedObject gameManagerSerializedObject = new SerializedObject(this);
+			//SerializedProperty miscMusicVolume = gameManagerSerializedObject.FindProperty("miscVolume");
+			
+			//_audioMenu.Q<Button>("background-volume").BindProperty(backgroundMusicVolume);
+			//_audioMenu.Q<Button>("other-volume").BindProperty(miscMusicVolume);
+			
+			
 			
 			// HUD
 			hud = menus.rootVisualElement.Q<VisualElement>("hud");
+			VisualElement playerStats = menus.rootVisualElement.Q<VisualElement>("player-stats");
+			scoreLabel = menus.rootVisualElement.Q<VisualElement>("score");
+			//ProgressBar playerHealthBar = new ProgressBar();
+			//ProgressBar playerArmorBar = new ProgressBar();
+			//ProgressBar playerShieldBar = new ProgressBar();
+			
+			//playerHealthBar.barFillColor = Color.red; //.BindProperty(new SerializedObject(player.gameObject.GetComponent<Player>().GetShip().health)) = Color.red;
+			//playerArmorBar.barFillColor = Color.yellow;
+			//playerShieldBar.barFillColor = Color.cyan;
+			
+			//playerStats.Add(playerHealthBar);
+			//playerStats.Add(playerArmorBar);
+			//playerStats.Add(playerShieldBar);
 
 			SetMenuTo(mainMenu);
 		}
@@ -158,6 +208,13 @@ namespace SpaceShooter {
 			shipPageLeftButton.visible = currentShipIndex - 1 >= 0;
 		}
 
+		private void SetSettingsMenuTo(VisualElement menu) {
+			_graphicsMenu.visible = _graphicsMenu == menu;
+			_playerMenu.visible = _playerMenu == menu;
+			_audioMenu.visible = _audioMenu == menu;
+			_controlsMenu.visible = _controlsMenu == menu;
+		}
+
 		private void SetMenuTo(VisualElement menu) {
 			mainMenu.visible = mainMenu == menu;
 			shipSelectionMenu.visible = shipSelectionMenu == menu;
@@ -182,8 +239,12 @@ namespace SpaceShooter {
 				Destroy(ship);
 			}
 
-			for (var i = 0; i < playerShips[currentShipIndex].GetComponent<Ship>().weapons.Length; i++) {
+			int weaponSlotCount = playerShips[currentShipIndex].GetComponent<Ship>().weapons.Length;
+			for (var i = 0; i < weaponSlotCount/2; i++) {
 				playerComp.SetWeapon(i, weapons[0]);
+			}
+			for (var i = weaponSlotCount/2; i < weaponSlotCount; i++) {
+				playerComp.SetWeapon(i, weapons[1]);
 			}
 
 			//playerComp.SetWeapon(1, weapons[0]);

@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Hull
-    second: {fileID: 2100000, guid: 8c50eadcf7e2b3f4382443a12a55d02e, type: 2}
+    second: {fileID: 2100000, guid: 95c5ac33fbb6597459ddafb56cc7acd6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

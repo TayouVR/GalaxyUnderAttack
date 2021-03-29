@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.05992735, g: 0.06801271, b: 0.1432957, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 162456279}
   - component: {fileID: 162456278}
   - component: {fileID: 162456280}
+  - component: {fileID: 162456281}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -167,13 +168,14 @@ MonoBehaviour:
   - {fileID: 1734653475480791765, guid: 086db1d851342f6409d56af738bb99fa, type: 3}
   - {fileID: 5864524633551645362, guid: 88185e5f0cae86c4f9c695f9384aa570, type: 3}
   - {fileID: 888336001928815587, guid: 3fe09dbf9085a8946b7ed6d4de7d4060, type: 3}
-  - {fileID: 1249191541268034205, guid: 22ee36092e1e4ac4ea5271d13a328d67, type: 3}
   - {fileID: 2526948030304923661, guid: f370cfea1467b0840ad9c1c7cc3b5b2f, type: 3}
   - {fileID: 2706996565730065139, guid: 425271052ecb4c548a3fe6ccc439d79f, type: 3}
   - {fileID: 3597117406497765527, guid: 874e042ad01e5a441bd237a58858a10c, type: 3}
   asteroidIDs: []
   enableNebulas: 0
   enableAsteroids: 1
+  backgroundMusic: {fileID: 162456281}
+  miscVolume: 0.05
   player: {fileID: 1326880341}
   nebulaColors:
     serializedVersion: 2
@@ -333,6 +335,102 @@ MonoBehaviour:
   Target: {fileID: 175740426}
   camTransform: {fileID: 963194228}
   SmoothTime: 0.05
+--- !u!82 &162456281
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162456277}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 6a78f970186f6ef4f9b1a2624fa7eedf, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.5
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &175740425
 GameObject:
   m_ObjectHideFlags: 0

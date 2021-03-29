@@ -19,6 +19,8 @@ public class GuidedMissile : DamageCaster {
 
     public bool missileReady = false;
 
+    public GameObject soundEffect;
+
     void Start() {
 
     }
@@ -69,6 +71,13 @@ public class GuidedMissile : DamageCaster {
         if (explosionEffectPrefab != null) {
             Instantiate(explosionEffectPrefab, transform.position, transform.rotation);
             //explosionEffect.Play();
+        }
+        if (soundEffect != null) {
+            var sfx = Instantiate(soundEffect, transform.position, transform.rotation);
+            var audioSource = sfx.GetComponent<AudioSource>();
+            audioSource.volume = GameManager.Instance.miscVolume;
+            audioSource.Play();
+            sfx.GetComponent<DelayedDestroyer>().StartCountdown();
         }
         
         killBullet();
